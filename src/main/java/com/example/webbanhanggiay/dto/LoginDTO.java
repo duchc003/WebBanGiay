@@ -1,0 +1,21 @@
+package com.example.webbanhanggiay.dto;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoginDTO {
+
+    @NotNull(message = "Please enter your account name")
+    private String name;
+
+    @NotNull(message = "Please enter your password")
+    private String password;
+
+}
