@@ -30,7 +30,7 @@
                                 alt="Card image cap"
                         />
                         <div class="card-body">
-                            <h5 class="card-title">${list.name}</h5>
+                            <a href="/product/product-detail/${list.name}" class="card-title">${list.name}</a>
                             <p class="card-text">
 <%--                                    ${list.price}--%>
                             </p>

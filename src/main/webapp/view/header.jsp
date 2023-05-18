@@ -35,7 +35,7 @@
                     </ul>
                 </div>
                 <div class="col-4">
-                    <form class="form-inline" action="">
+                    <form class="form-inline" action="/product/search" method="get">
                         <div class="input-group find-product">
                             <input type="text" class="form-control " name="name" placeholder="Tìm kiếm">
                             <button type="submit" class="btn btn-warning">Tìm kiếm</button>

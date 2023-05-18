@@ -1,6 +1,7 @@
 package com.example.webbanhanggiay.service.impl;
 
 import com.example.webbanhanggiay.dto.ProductDTO;
+import com.example.webbanhanggiay.dto.ProductDetailDTO;
 import com.example.webbanhanggiay.entity.Product;
 import com.example.webbanhanggiay.repository.ProductRepository;
 import com.example.webbanhanggiay.service.ProductService;
@@ -57,5 +58,30 @@ public class ProductServiceImpl implements ProductService {
                 .map(objects -> new ProductDTO((String) objects[0], (Float) objects[1], (String) objects[2]))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageable, pageObjects.getTotalElements());
+    }
+
+    @Override
+    public ProductDetailDTO getOneDetailProduct(String name) {
+        List<Object[]> result = productRepository.getOneDetailProduct(name);
+        Object[] row = result.get(0);
+        String ten = (String) row[0];
+        Float price = (Float) row[1];
+        String description = (String) row[2];
+        String color = (String) row[3];
+        Integer size = (Integer) row[4];
+        String image = (String) row[5];
+        ProductDetailDTO productDetailDTO = new ProductDetailDTO(ten, price, description, color, size, image);
+        return productDetailDTO;
+    }
+
+    @Override
+    public ProductDTO searchByName(String name) {
+        List<Object[]> result = productRepository.searchByName(name);
+        Object[] row = result.get(0);
+        String ten = (String) row[0];
+        String image = (String) row[1];
+        Float price = (Float) row[2];
+        ProductDTO productDTO = new ProductDTO(ten, price, image);
+        return productDTO;
     }
 }
