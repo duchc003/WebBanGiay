@@ -53,6 +53,7 @@ a {
 }
 .input-group.find-product {
     width: 90%;
+    padding-top: 10px;
 }
 a.nav-link:hover{
     font-size: 15px;

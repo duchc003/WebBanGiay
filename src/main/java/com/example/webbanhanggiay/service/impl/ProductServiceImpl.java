@@ -31,15 +31,15 @@ public class ProductServiceImpl implements ProductService {
         List<Object[]> results = productRepository.findAllProductDetails();
         List<ProductDTO> productDTOList = new ArrayList<>();
 
-        for (Object[] reObjects : results
-        ) {
+        for (Object[] reObjects : results) {
             String name = (String) reObjects[0];
-            String image = (String) reObjects[1];
-            Float price = (Float) reObjects[2];
+            String image = (String) reObjects[2];
+            Float price = (Float) reObjects[1];
 
             ProductDTO productDTO = new ProductDTO(name, price, image);
             productDTOList.add(productDTO);
         }
+
         return productDTOList;
     }
 
@@ -51,8 +51,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductDTO> getAllProduct(Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);//Pageable sẽ chứa các thông tin phân trang như số phần tử được lấy, vị trí trang được lấy
-        Page<Object[]> pageObjects = productRepository.findAllPage(pageable);//Page sẽ chứa kết quả trả về (gồm số phần tử, danh sách các phần tử)
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 9;
+        }
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Object[]> pageObjects = productRepository.findAllPage(pageable);
         List<Object[]> listObjects = pageObjects.getContent();
         List<ProductDTO> productDTOList = listObjects.stream()
                 .map(objects -> new ProductDTO((String) objects[0], (Float) objects[1], (String) objects[2]))

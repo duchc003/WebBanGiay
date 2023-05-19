@@ -34,7 +34,7 @@
                             <p class="card-text">
 <%--                                    ${list.price}--%>
                             </p>
-                            <a href="#" class="btn btn-primary">Buy Now</a>
+                            <a href="#" class="btn btn-primary">Add to cart</a>
                         </div>
                     </div>
                 </div>

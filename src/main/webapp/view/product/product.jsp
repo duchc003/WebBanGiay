@@ -25,7 +25,7 @@
                     <c:forEach var="category" items="${categoryList}">
                         <a
                                 type="button"
-                                href="/product/view-product/${category.id}"
+                                href="/product/view-product/category/${category.id}"
                                 class="list-group-item list-group-item-action"
                         >
                                 ${category.name}
@@ -35,120 +35,27 @@
                 <div class="box-product-hot">
                     <div class="header">Sản phẩm nổi bật</div>
                     <ul class="body-pro">
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href="l"
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
+                        <c:forEach items="${list}" var="product">
+                            <li class="item-list">
                                 <a
-                                        class="link-view"
+                                        class="img-view"
+                                        href="l"
                                         title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href="/guitar-key-03-vang.html"
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
-                                <a
-                                        class="link-view"
-                                        title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href=""
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
-                                <a
-                                        class="link-view"
-                                        title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href=""
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
-                                <a
-                                        class="link-view"
-                                        title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href=""
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
-                                <a
-                                        class="link-view"
-                                        title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
-                        <li class="item-list">
-                            <a
-                                    class="img-view"
-                                    href=""
-                                    title=""
-                            ><img
-                                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQyZ8dquLKENvJRXbmi6GjyVTH_d4qvwnK_KkGdvd41HMr6riNtSxMQKbB2YjpoI4H9UGlZFkajNRje_h66OzigwjvzpNgzJl3-TgVBkduyH6Ms30uiuPIX2EuOMGBisBF8wQ&usqp=CAc"
-                                    align="left"
-                                    alt=""
-                            /></a>
-                            <h5>
-                                <a
-                                        class="link-view"
-                                        title=""
-                                        href=""
-                                >ECKO UNLTD GIÀY SNEAKERS WOMEN IS22-26722</a
-                                >
-                            </h5>
-                        </li>
+                                ><img
+                                        src="https://cf.shopee.vn/file/4b924cc79c66d4466db085e6f7f5dfc5"
+                                        align="left"
+                                        alt=""
+                                /></a>
+                                <h5>
+                                    <a
+                                            class="link-view"
+                                            title=""
+                                            href=""
+                                    >${product.name}</a
+                                    >
+                                </h5>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -156,7 +63,7 @@
         <div class="col-lg-9 all-product">
             <div class="container">
                 <div class="row card-image-margin">
-                    <c:forEach items="${productList.content}" var="product">
+                    <c:forEach items="${list}" var="product">
                         <div class="col-md-4">
                             <div class="card box-produc">
                                 <img
@@ -165,7 +72,7 @@
                                         alt="Sản phẩm 1"
                                 />
                                 <div class="card-body">
-                                    <a class="link-view" title="" href=""
+                                    <a class="link-view" title="" href="/product/product-detail/${product.name}"
                                     ><h4 class="card-title">
                                             ${product.name}
                                     </h4></a
@@ -177,7 +84,7 @@
                                             data-toggle="modal"
                                             data-target="#product1Modal"
                                     >
-                                        Xem chi tiết
+                                        Add to cart
                                     </button>
                                 </div>
                             </div>
@@ -188,25 +95,25 @@
                     <div class="col-lg-4">
                         <ul class="pagination main-pager">
                             <li class="page-item previous-center">
-                                <a class="page-link" href="#" onclick="changePage(${productList.number}-1)">Previous</a>
+                                <a class="page-link" href="#" onclick="changePage(${product.number}-1)">Previous</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-4">
                         <ul class="pagination main-pager">
                             <li class="page-item previous">
-                                <input type="number" id="input-value" min="1" max="${productList.totalPages}"
+                                <input type="number" id="input-value" min="1" max="${product.totalPages}"
                                        style="width: 40px; border: none; appearance: none; text-align: center;"
                                        onchange="changePage(this.value)">
                                 <input style="width: 70px; border: none" id="max-value"
-                                       value="| ${productList.totalPages}" readonly="">
+                                       value="| ${product.totalPages}" readonly="">
                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-4">
                         <ul class="pagination main-pager">
                             <li class="page-item previous-center">
-                                <a class="page-link" href="#" onclick="changePage(${productList.number}+1)">Next</a>
+                                <a class="page-link" href="#" onclick="changePage(${product.number}+1)">Next</a>
                             </li>
                         </ul>
                     </div>
