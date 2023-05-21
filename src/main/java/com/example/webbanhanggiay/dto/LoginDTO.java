@@ -1,5 +1,6 @@
 package com.example.webbanhanggiay.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LoginDTO {
 
-    @NotNull(message = "Please enter your account name")
+    @NotBlank(message = "Please enter your account name")
     private String name;
 
-    @NotNull(message = "Please enter your password")
+    @NotBlank(message = "Please enter your password")
     private String password;
 
 }

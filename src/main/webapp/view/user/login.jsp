@@ -20,23 +20,31 @@
     </div>
     <c:remove var="message" scope="session"></c:remove>
 </c:if>
+<c:if test="${!empty error}">
+    <div class="alert alert-primary" role="alert">
+            ${error}
+    </div>
+    <c:remove var="error" scope="session"></c:remove>
+</c:if>
 <section class="vh-100">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 text-black">
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                    <form:form style="width: 23rem;" action="/user/login" method="post" modelAttribute="login">
+                    <form:form style="width: 23rem;" action="/dang-nhap/login" method="post" modelAttribute="login">
                         <center><h1>Login</h1></center>
                         <div class="form-outline mb-4">
                             <label class="form-label">Username</label>
-                            <form:input path="name" class="form-control form-control-lg" />
+                            <form:input type="text" path="name" class="form-control form-control-lg" />
+                            <form:errors type="text" path="name" class="form-control form-control-lg" />
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" >Password</label>
-                            <form:input type="password" path="password" class="form-control form-control-lg" />
+                            <form:input  type="password" path="password" class="form-control form-control-lg" />
+                            <form:errors type="password" path="password" class="form-control form-control-lg" />
                         </div>
                         <div class="pt-1 mb-4">
-                            <input class="btn btn-info btn-lg btn-block" type="submit" value="login"></input>
+                            <form:button type="submit" class="btn btn-warning">Login</form:button>
                         </div>
                         <p class="small mb-5 pb-lg-2"><a class="text-muted" href="/user/forgot-password">Forgot password?</a></p>
                         <p>Don't have an account? <a href="/user/register" class="link-info">Register here</a></p>

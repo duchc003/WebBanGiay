@@ -78,6 +78,7 @@ ul.body-pro li.item-list a.link-view {
     font-weight: 700;
     margin-top: 8px;
     font-size: 12px;
+    font-size: 12px;
 }
 .box-product-hot ul.body-pro li a.img-view img {
     border: thin solid rgba(204, 204, 204, 0.29);
@@ -125,4 +126,7 @@ section.container {
 }
 .col-md-4 {
     padding-bottom: 25px;
+}
+.all {
+    background-color: beige;
 }

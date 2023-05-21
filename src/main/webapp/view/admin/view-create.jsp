@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
@@ -28,6 +29,7 @@
             border: 0px;
             float: left;
         }
+
         a.nav-link:hover {
             color: coral;
         }
@@ -42,6 +44,20 @@
         </div>
     </div>
 </header>
+<div>
+    <c:if test="${!empty message}">
+        <div class="alert-danger">
+                ${message}
+            <c:remove var="message" scope="session"></c:remove>
+        </div>
+    </c:if>
+    <c:if test="${!empty error}">
+        <div class="alert-danger">
+                ${error}
+            <c:remove var="error" scope="session"></c:remove>
+        </div>
+    </c:if>
+</div>
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -132,98 +148,111 @@
             </div>
             <br>
             <div class="container">
-                <div class="form-outline">
-                    <label class="form-label" for="typeText">Name</label>
-                    <input type="text" id="typeText" class="form-control"/>
-                </div>
-                <br>
-                <label class="form-label" for="typeText">Size</label>
-                <div style="display: flex;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option>Vui Lòng Chọn</option>
-                        <c:forEach items="${listSize}" var="size">
-                            <option value="${size.id}">${size.size}</option>
-                        </c:forEach>
-                    </select>
-                    <button style="margin-left: 10px;" class="btn btn-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <br>
-                <label class="form-label" for="typeText">Color</label>
-                <div style="display: flex;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option>Vui Lòng Chọn</option>
-                        <c:forEach items="${listColor}" var="color">
-                            <option value="${color.id}">${color.name}</option>
-                        </c:forEach>
-                    </select>
-                    <button style="margin-left: 10px;" class="btn btn-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <br>
-                <label class="form-label" for="typeText">Category</label>
-                <div style="display: flex;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option>Vui Lòng Chọn</option>
-                        <c:forEach items="${listCategory}" var="category">
-                            <option value="${category.id}">${category.name}</option>
-                        </c:forEach>
-                    </select>
-                    <button style="margin-left: 10px;" class="btn btn-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <br>
-                <label class="form-label" for="typeText">Origin</label>
-                <div style="display: flex;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option>Vui Lòng Chọn</option>
-                        <c:forEach items="${listOrigin}" var="origin">
-                            <option value="${origin.id}">${origin.name}</option>
-                        </c:forEach>
-                    </select>
-                    <button style="margin-left: 10px;" class="btn btn-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <br>
-                <div class="form-outline">
-                    <label class="form-label" for="typeText">Quantity</label>
-                    <input type="text" class="form-control"/>
-                </div>
-                <br>
-                <div class="form-outline">
-                    <label class="form-label" for="typeText">Price</label>
-                    <input type="text" class="form-control"/>
-                </div>
-                <br>
-                <div class="form-outline">
-                    <label class="form-label" for="typeText">Description</label>
-                    <input type="text" class="form-control"/>
-                </div>
-                <br>
-                <div class="form-outline">
-                    <label class="form-label" for="typeText">Image</label>
-                    <input type="text" class="form-control"/>
-                </div>
-                <br>
+                <form:form action="/admin/product-manager/create" method="post" modelAttribute="productManagerDTO">
+                    <div class="form-outline">
+                        <label class="form-label" for="typeText">Name</label>
+                        <form:input type="text" path="name" id="typeText" class="form-control"/>
+                        <form:errors path="name" cssClass="text-danger"/>
+                    </div>
+                    <br>
+                    <label class="form-label" for="typeText">Size</label>
+                    <div style="display: flex;">
+                        <form:select path="size" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${listSize}" var="size">
+                                <form:option value="${size.id}">${size.size}</form:option>
+                            </c:forEach>
+                        </form:select>
+                        <form:errors path="size" cssClass="text-danger"/>
+                        <button style="margin-left: 10px;" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <br>
+                    <label class="form-label" for="typeText">Color</label>
+                    <div style="display: flex;">
+                        <form:select path="color" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${listColor}" var="color">
+                                <form:option value="${color.id}">${color.name}</form:option>
+                            </c:forEach>
+                        </form:select>
+                        <form:errors path="color" cssClass="text-danger"/>
+                        <button style="margin-left: 10px;" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <br>
+                    <label class="form-label" for="typeText">Category</label>
+                    <div style="display: flex;">
+                        <form:select path="category" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${listCategory}" var="category">
+                                <form:option value="${category.id}">${category.name}</form:option>
+                            </c:forEach>
+                        </form:select>
+                        <form:errors path="category" cssClass="text-danger"/>
+                        <button style="margin-left: 10px;" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <br>
+                    <label class="form-label" for="typeText">Origin</label>
+                    <div style="display: flex;">
+                        <form:select path="origin" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${listOrigin}" var="origin">
+                                <form:option value="${origin.id}">${origin.name}</form:option>
+                            </c:forEach>
+                        </form:select>
+                        <form:errors path="origin" cssClass="text-danger"/>
+                        <button style="margin-left: 10px;" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <label class="form-label" for="typeText">Quantity</label>
+                        <form:input path="quantity" type="number" class="form-control"/>
+                        <form:errors path="quantity" cssClass="text-danger"/>
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <label class="form-label" for="typeText">Price</label>
+                        <form:input path="price" type="number" class="form-control"/>
+                        <form:errors path="price" cssClass="text-danger"/>
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <label class="form-label" for="typeText">Description</label>
+                        <form:input path="description" type="text" class="form-control"/>
+                        <form:errors path="description" cssClass="text-danger"/>
+                    </div>
+                    <br>
+                    <div class="form-outline">
+                        <label class="form-label" for="typeText">Image</label>
+                        <form:input path="image" type="text" class="form-control"/>
+                        <form:errors path="image" cssClass="text-danger"/>
+<%--                        <button style="margin-left: 10px;" class="btn btn-warning">--%>
+<%--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"--%>
+<%--                                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">--%>
+<%--                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>--%>
+<%--                            </svg>--%>
+<%--                        </button>--%>
+                    </div>
+                    <br>
+                    <form:button type="submit" class="btn btn-warning">ADD</form:button>
+                </form:form>
             </div>
             <hr>
-            <button type="button" class="btn btn-warning">ADD</button>
             <hr>
         </main>
     </div>

@@ -17,12 +17,15 @@
         h6 {
             padding-top: 8px;
         }
-        .col-3{
+
+        .col-3 {
             text-align: center;
         }
-        header.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0.shadow{
+
+        header.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0.shadow {
             background-color: #0CBEF0 !important;
         }
+
         ul.nav.flex-column {
             width: 100%;
             line-height: 40px;
@@ -35,6 +38,7 @@
             border: 0px;
             float: left;
         }
+
         a.nav-link:hover {
             color: coral;
         }
@@ -158,7 +162,7 @@
                     </div>
                     <div class="col-3">
                         <h6>
-                            Tổng Sản Phẩm Đang Có:
+                            Tổng Sản Phẩm Đang Có: ${soLuong}
                         </h6>
                     </div>
                     <div class="col-3">
@@ -186,22 +190,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>
-                            <a href="/admin/product-manager/view-update" type="submit" class="btn btn-warning">UPDATE</a>
-                            <a href="" type="submit" class="btn btn-warning">DELETE</a>
-                        </td>
-                    </tr>
+                    <c:forEach var="list" items="${productDetailDTOList}" varStatus="i">
+                        <tr>
+                            <td>${i.index}</td>
+                            <td>${list.name}</td>
+                            <td>${list.color}</td>
+                            <td>${list.size}</td>
+                            <td>${list.category}</td>
+                            <td>${list.origin}</td>
+                            <td>${list.quantity}</td>
+                            <td>${list.price}</td>
+                            <td>${list.description}</td>
+                            <td>${list.image}</td>
+                            <td>
+                                <a href="/admin/product-manager/view-update" type="submit" class="btn btn-warning">UPDATE</a>
+                                <a href="" type="submit" class="btn btn-warning">DELETE</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

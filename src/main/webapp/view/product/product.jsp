@@ -16,112 +16,92 @@
 <body>
 <jsp:include page="/view/header.jsp"></jsp:include>
 <jsp:include page="/view/banner.jsp"></jsp:include>
-<section class="container">
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="list-group">
-                <div class="box-product-hot">
-                    <div class="header">DANH MỤC SẢN PHẨM</div>
-                    <c:forEach var="category" items="${categoryList}">
-                        <a
-                                type="button"
-                                href="/product/view-product/category/${category.id}"
-                                class="list-group-item list-group-item-action"
-                        >
-                                ${category.name}
-                        </a>
-                    </c:forEach>
-                </div>
-                <div class="box-product-hot">
-                    <div class="header">Sản phẩm nổi bật</div>
-                    <ul class="body-pro">
-                        <c:forEach items="${list}" var="product">
-                            <li class="item-list">
-                                <a
-                                        class="img-view"
-                                        href="l"
-                                        title=""
-                                ><img
-                                        src="https://cf.shopee.vn/file/4b924cc79c66d4466db085e6f7f5dfc5"
-                                        align="left"
-                                        alt=""
-                                /></a>
-                                <h5>
-                                    <a
-                                            class="link-view"
-                                            title=""
-                                            href=""
-                                    >${product.name}</a
-                                    >
-                                </h5>
-                            </li>
+<div class="all">
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group">
+                    <div class="box-product-hot">
+                        <div class="header">DANH MỤC SẢN PHẨM</div>
+                        <c:forEach var="category" items="${categoryList}">
+                            <a
+                                    type="button"
+                                    href="/product/view-product/?categoryId=${category.id}"
+                                    class="list-group-item list-group-item-action"
+                            >
+                                    ${category.name}
+                            </a>
                         </c:forEach>
-                    </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-9 all-product">
-            <div class="container">
-                <div class="row card-image-margin">
-                    <c:forEach items="${list}" var="product">
-                        <div class="col-md-4">
-                            <div class="card box-produc">
-                                <img
-                                        src="${product.image}"
-                                        class="card-img-top"
-                                        alt="Sản phẩm 1"
-                                />
-                                <div class="card-body">
-                                    <a class="link-view" title="" href="/product/product-detail/${product.name}"
-                                    ><h4 class="card-title">
-                                            ${product.name}
-                                    </h4></a
-                                    >
-                                    <p class="card-text"><strong>Giá:</strong> $100</p>
-                                    <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#product1Modal"
-                                    >
-                                        Add to cart
-                                    </button>
+            <div class="col-lg-9 all-product">
+                <div class="container">
+                    <div class="row card-image-margin">
+                        <c:forEach items="${list}" var="product">
+                            <div class="col-md-4">
+                                <div class="card box-produc">
+                                    <img
+                                            src="${product.image}"
+                                            class="card-img-top"
+                                            alt="Sản phẩm 1"
+                                    />
+                                    <div class="card-body">
+                                        <a class="link-view" title="" href="/product/product-detail/${product.name}"
+                                        ><h4 class="card-title">
+                                                ${product.name}
+                                        </h4></a
+                                        >
+                                        <p class="card-text"><strong>Giá:</strong> $100</p>
+                                        <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                                data-toggle="modal"
+                                                data-target="#product1Modal"
+                                        >
+                                            Add to cart
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        </c:forEach>
+                    </div>
+                    <div class="row phan-trang">
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <ul class="pagination main-pager">
+                                <c:if test="${results.number  > 0}">
+                                    <li class="page-item previous-center">
+                                        <a class="page-link" href="/product/view-product?pageNumber=${results.number - 1}">Previous</a>
+                                    </li>
+                                </c:if>
+                            </ul>
                         </div>
-                    </c:forEach>
-                </div>
-                <div class="row phan-trang">
-                    <div class="col-lg-4">
-                        <ul class="pagination main-pager">
-                            <li class="page-item previous-center">
-                                <a class="page-link" href="#" onclick="changePage(${product.number}-1)">Previous</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul class="pagination main-pager">
-                            <li class="page-item previous">
-                                <input type="number" id="input-value" min="1" max="${product.totalPages}"
-                                       style="width: 40px; border: none; appearance: none; text-align: center;"
-                                       onchange="changePage(this.value)">
-                                <input style="width: 70px; border: none" id="max-value"
-                                       value="| ${product.totalPages}" readonly="">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <ul class="pagination main-pager">
-                            <li class="page-item previous-center">
-                                <a class="page-link" href="#" onclick="changePage(${product.number}+1)">Next</a>
-                            </li>
-                        </ul>
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <ul class="pagination main-pager">
+                                <li class="page-item previous">
+                                    <form action="/product/view-product" method="get">
+                                        <input type="number" id="input-value" name="number" min="${results.number + 1}" max="${results.totalPages}"
+                                               style="width: 40px; border: none; appearance: none; text-align: center;"
+                                               value="${results.number}">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <ul class="pagination main-pager">
+                                <li class="page-item previous-center">
+                                    <c:if test="${results.number < results.totalPages - 1}">
+                                        <a class="page-link" href="/product/view-product?pageNumber=${results.number + 1}">Next</a>
+                                    </c:if>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <jsp:include page="/view/footer.jsp"></jsp:include>
 <link rel="stylesheet" href="/js/bootstrap.js">
 </body>
