@@ -15,20 +15,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductManagerDTO {
 
+    private Integer id;
+
     @NotBlank(message = "Name is required")
     private String name;
 
     @NotNull(message = "Color is required")
-    private String color;
+    private Integer color;
 
     @NotNull(message = "Size is required")
     private Integer size;
 
-    @NotBlank(message = "Category is required")
-    private String category;
+    @NotNull(message = "Category is required")
+    private Integer category;
 
-    @NotBlank(message = "Origin is required")
-    private String origin;
+    @NotNull(message = "Origin is required")
+    private Integer origin;
 
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1")

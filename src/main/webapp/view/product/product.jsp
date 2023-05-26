@@ -25,8 +25,8 @@
                         <div class="header">DANH MỤC SẢN PHẨM</div>
                         <c:forEach var="category" items="${categoryList}">
                             <a
-                                    type="button"
-                                    href="/product/view-product/?categoryId=${category.id}"
+                                    type="submit"
+                                    href="/product/view-product/category/${category.id}"
                                     class="list-group-item list-group-item-action"
                             >
                                     ${category.name}
@@ -38,7 +38,7 @@
             <div class="col-lg-9 all-product">
                 <div class="container">
                     <div class="row card-image-margin">
-                        <c:forEach items="${list}" var="product">
+                        <c:forEach items="${productList}" var="product">
                             <div class="col-md-4">
                                 <div class="card box-produc">
                                     <img
@@ -52,7 +52,7 @@
                                                 ${product.name}
                                         </h4></a
                                         >
-                                        <p class="card-text"><strong>Giá:</strong> $100</p>
+                                        <p class="card-text"><strong>Giá:</strong> ${product.price}</p>
                                         <button
                                                 type="button"
                                                 class="btn btn-primary"
@@ -82,7 +82,7 @@
                                     <form action="/product/view-product" method="get">
                                         <input type="number" id="input-value" name="number" min="${results.number + 1}" max="${results.totalPages}"
                                                style="width: 40px; border: none; appearance: none; text-align: center;"
-                                               value="${results.number}">
+                                               value="${results.number + 1}">
                                     </form>
                                 </li>
                             </ul>

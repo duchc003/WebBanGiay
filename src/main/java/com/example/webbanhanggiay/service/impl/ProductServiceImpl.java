@@ -2,6 +2,7 @@ package com.example.webbanhanggiay.service.impl;
 
 import com.example.webbanhanggiay.dto.ProductDTO;
 import com.example.webbanhanggiay.dto.ProductDetailDTO;
+import com.example.webbanhanggiay.dto.ProductViewDTO;
 import com.example.webbanhanggiay.entity.Product;
 import com.example.webbanhanggiay.repository.ProductRepository;
 import com.example.webbanhanggiay.service.ProductService;
@@ -62,9 +63,60 @@ public class ProductServiceImpl implements ProductService {
         Page<Object[]> pageObjects = productRepository.findAllPage(pageable);
         List<Object[]> listObjects = pageObjects.getContent();
         List<ProductDTO> productDTOList = listObjects.stream()
-                .map(objects -> new ProductDTO((String) objects[0], (Float) objects[1], (String) objects[2]))
+                .map(objects -> new ProductDTO(
+                        (String) objects[0],
+                        (Float) objects[1],
+                        (String) objects[2]))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageable, pageObjects.getTotalElements());
+    }
+
+    @Override
+    public Page<ProductDTO> getAllByProduct(Integer categoryId, Integer pageNo, Integer pageSize) {
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 9;
+        }
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Object[]> pageObjects = productRepository.findAllCategory(categoryId,pageable);
+        List<Object[]> listObjects = pageObjects.getContent();
+        List<ProductDTO> productDTOList = listObjects.stream()
+                .map(objects -> new ProductDTO(
+                        (String) objects[0],
+                        (Float) objects[1],
+                        (String) objects[2]))
+                .collect(Collectors.toList());
+        return new PageImpl<>(productDTOList, pageable, pageObjects.getTotalElements());
+    }
+
+    @Override
+    public List<ProductDTO> getAllProductByCate(Integer categoryId) {
+        List<Object[]> getAllProduct = productRepository.getAllProduct(categoryId);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (Object[] list : getAllProduct) {
+            String ten = (String) list[0];
+            Float price = (Float) list[1];
+            String image = (String) list[2];
+            ProductDTO productDTO = new ProductDTO(ten,price,image);
+            productDTOList.add(productDTO);
+        }
+        return productDTOList;
+    }
+
+    @Override
+    public List<ProductDTO> findByImage(String name) {
+        List<Object[]> listObjects = productRepository.findByImage(name);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (Object[] list : listObjects) {
+            String ten = (String) list[0];
+            Float price = (Float) list[1];
+            String image = (String) list[2];
+            ProductDTO productDTO = new ProductDTO(ten,price,image);
+            productDTOList.add(productDTO);
+        }
+        return productDTOList;
     }
 
     @Override
@@ -91,4 +143,5 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO = new ProductDTO(ten, price, image);
         return productDTO;
     }
+
 }

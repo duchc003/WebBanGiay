@@ -50,5 +50,8 @@ public class User {
     private List<Oder> listOder;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    private List<Account> listAccount;
+    private List<Cart> cartList;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Role role;
 }

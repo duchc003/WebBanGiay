@@ -18,6 +18,9 @@ public class AccountController {
     @Autowired
     private AccountServiceImpl accountService;
 
+    @Autowired
+    private HttpSession session;
+
     @GetMapping("form")
     public String showFormLogin(Model model) {
         model.addAttribute("login", new LoginDTO());
@@ -25,19 +28,33 @@ public class AccountController {
     }
 
     @PostMapping("login")
-    public String login(@Valid
-                        @RequestParam("name") String name,
-                        @RequestParam("password") String password, @ModelAttribute("login") LoginDTO loginDTO,
-                        HttpSession httpSession, BindingResult result) {
-        if (result.hasErrors()) {
-            return "forward:/dang-nhap/login";
-        }
-        loginDTO = accountService.findByName(name, password);
-        if (loginDTO != null && loginDTO.getName().equals(name) && loginDTO.getPassword().equals(password)) {
-            httpSession.setAttribute("loggedInUser", loginDTO);
-            return "redirect:/product/hien-thi";
-        } else {
-            return "forward:/dang-nhap/login";
+    public String login(@Valid @ModelAttribute("login") LoginDTO loginDTO,
+                        BindingResult result,
+                        HttpSession session) {
+        try {
+            if (result.hasErrors()) {
+                return "/user/login";
+            } else {
+                LoginDTO loggedInUser = accountService.findByName(loginDTO.getName(), loginDTO.getPassword());
+                if (loggedInUser != null && loggedInUser.getName() != null && loggedInUser.getPassword() != null &&
+                        loggedInUser.getName().equals(loginDTO.getName()) && loggedInUser.getPassword().equals(loginDTO.getPassword())) {
+                    session.setAttribute("loggedInUser", loggedInUser);
+                    session.setAttribute("message", "Login success");
+                    if (loggedInUser.getName().equals("admin") && loggedInUser.getPassword().equals("congduc003")) {
+                        session.setAttribute("message", "Login success");
+                        return "redirect:/admin/dashboard";
+                    } else {
+                        return "redirect:/product/hien-thi";
+                    }
+                } else {
+                    session.setAttribute("error", "Invalid username or password");
+                    return "/user/login";
+                }
+            }
+        } catch (Exception e) {
+            session.setAttribute("error", "Login Fail");
+            e.printStackTrace();
+            return "/user/login";
         }
     }
 
@@ -47,25 +64,34 @@ public class AccountController {
         return "redirect:/dang-nhap/form";
     }
 
-//    @GetMapping("register")
-//    public String showFormRegister(Model model) {
-//        model.addAttribute("register", new RegisterDTO());
-//        return "/user/register";
-//    }
-//
-//    @PostMapping("register")
-//    public String Register(@Valid RegisterDTO registerDTO, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("view", "/view/user/register.jsp");
-//            return "/user/register";
-//        } else {
-//            registerDTO = accountService.create(registerDTO);
-//            return "/user/login";
-//        }
-//    }
-//
-//    @GetMapping("forgot-password")
-//    public String formForgotPassword() {
-//        return "/user/forgot-password";
-//    }
+    @GetMapping("view-register")
+    public String showFormRegister(Model model) {
+        model.addAttribute("registerDTO", new RegisterDTO());
+        return "/user/register";
+    }
+
+    @PostMapping("create-register")
+    public String Register(@Valid @ModelAttribute("registerDTO") RegisterDTO registerDTO, BindingResult bindingResult, Model model) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return "/user/register";
+            }
+            if (!registerDTO.getPassword().equals(registerDTO.getRepeatPassword())) {
+                session.setAttribute("error", "Mật khẩu nhập lại không khớp");
+                return "/user/register";
+            }
+            registerDTO = accountService.create(registerDTO);
+            session.setAttribute("message", "Tạo Tài Khoản Thành Công");
+            return "redirect:/dang-nhap/form";
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.setAttribute("error", "Tạo Tài Khoản thất bại");
+        }
+        return "/user/register";
+    }
+
+    @GetMapping("forgot-password")
+    public String formForgotPassword() {
+        return "/user/forgot-password";
+    }
 }

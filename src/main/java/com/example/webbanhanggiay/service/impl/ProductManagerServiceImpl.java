@@ -1,15 +1,24 @@
 package com.example.webbanhanggiay.service.impl;
 
+import com.example.webbanhanggiay.dto.ProductDTO;
+import com.example.webbanhanggiay.dto.ProductViewDTO;
 import com.example.webbanhanggiay.dto.CategoryDetailDTO;
 import com.example.webbanhanggiay.dto.ProductManagerDTO;
 import com.example.webbanhanggiay.entity.*;
 import com.example.webbanhanggiay.repository.*;
 import com.example.webbanhanggiay.service.ProductManagerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductManagerServiceImpl implements ProductManagerService {
@@ -35,51 +44,16 @@ public class ProductManagerServiceImpl implements ProductManagerService {
     @Autowired
     private ImageRepository imageRepository;
 
-    @Override
-    public List<CategoryDetailDTO> listProductByCategory(Integer categoryId) {
-        List<Object[]> result = productRepository.listProductByCategory(categoryId);
-        List<CategoryDetailDTO> categoryDetailDTOList = new ArrayList<>();
-
-        for (Object[] listObjects : result) {
-            String name = (String) listObjects[0];
-            String image = (String) listObjects[1];
-            Float price = (Float) listObjects[2];
-            CategoryDetailDTO categoryDetailDTO = new CategoryDetailDTO(name, image, price);
-            categoryDetailDTOList.add(categoryDetailDTO);
-        }
-        return categoryDetailDTOList;
-    }
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public List<Category> getALL() {
-        List<Category> categoryList = categoryRepository.findAll();
-        return categoryList;
-    }
-
-    @Override
-    public List<Origin> getALLOrigin() {
-        List<Origin> getALLOrigin = originRepository.findAll();
-        return getALLOrigin;
-    }
-
-    @Override
-    public List<Color> getALLColor() {
-        List<Color> getALLOrigin = colorRepository.findAll();
-        return getALLOrigin;
-    }
-
-    @Override
-    public List<Size> getALLSize() {
-        List<Size> getALLSize = sizeRepository.findAll();
-        return getALLSize;
-    }
-
-    @Override
-    public ProductManagerDTO save(ProductManagerDTO productManagerDTO, Image image, ProductDetail productDetail) {
-        Product existingProduct = productRepository.findByName(productManagerDTO.getName());//find name lấy id
-        Category category = categoryRepository.findByName(productManagerDTO.getCategory());//find name lấy id
-        Size size = sizeRepository.findBySize(productManagerDTO.getSize());//find name lấy id
-        Origin origin = originRepository.findByName(productManagerDTO.getOrigin());//find name lấy id
+    public ProductManagerDTO add(ProductManagerDTO productManagerDTO, Image image, ProductDetail productDetail) {
+        Product existingProduct = productRepository.findByName(productManagerDTO.getName());
+        Category category = categoryRepository.getById(productManagerDTO.getCategory());
+        Size size = sizeRepository.getById(productManagerDTO.getSize());
+        Origin origin = originRepository.getById(productManagerDTO.getOrigin());
+        Color color = colorRepository.getById(productManagerDTO.getColor());
 
         Product product;
         if (existingProduct != null) {
@@ -99,6 +73,7 @@ public class ProductManagerServiceImpl implements ProductManagerService {
         productDetail.setCategory(category);
         productDetail.setSize(size);
         productDetail.setOrigin(origin);
+        productDetail.setColor(color);
         productDetail.setQuantity(productManagerDTO.getQuantity());
         productDetail.setPrice(productManagerDTO.getPrice());
         productDetail = productDetailRepository.save(productDetail);
@@ -107,28 +82,120 @@ public class ProductManagerServiceImpl implements ProductManagerService {
     }
 
     @Override
-    public List<ProductManagerDTO> selectAllProduct() {
-        List<Object[]> result = productDetailRepository.selectAllProduct();
-        List<ProductManagerDTO> productManagerDTOList = new ArrayList<>();
-        for (Object[] list: result){
-             String name = (String) list[0];
-             String color = (String) list[1];
-             Integer size = (Integer) list[2];
-             String category = (String) list[3];
-             String origin = (String) list[4];
-             Integer quantity = (Integer) list[5];
-             Float price = (Float) list[6];
-             String description = (String) list[7];
-             String image = (String) list[8];
-            ProductManagerDTO productManagerDTO = new ProductManagerDTO(name,color,size,category,origin,quantity,price,description,image);
-            productManagerDTOList.add(productManagerDTO);
+    public Page<ProductViewDTO> selectAllProduct(Integer pageNo, Integer pageSize) {
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 9;
+        }
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Object[]> pageObject = productDetailRepository.selectAllProduct(pageable);
+        List<Object[]> listObject = pageObject.getContent();
+        List<ProductViewDTO> productDTOList = listObject.stream()
+                .map(objects -> new ProductViewDTO(
+                        (Integer) objects[0],
+                        (String) objects[1],
+                        (String) objects[2],
+                        (Integer) objects[3],
+                        (String) objects[4],
+                        (String) objects[5],
+                        (Integer) objects[6],
+                        (Float) objects[7],
+                        (String) objects[8],
+                        (String) objects[9]))
+                .collect(Collectors.toList());
+        return new PageImpl<>(productDTOList, pageable, pageObject.getTotalElements());
+    }
+
+    @Override
+    public Integer countProduct() {
+        List<Object[]> products = productDetailRepository.selectAllProduct();
+        return products.size();
+    }
+
+    @Override
+    public void update(ProductManagerDTO productManagerDTO) {
+        Product product = productRepository.findById(productManagerDTO.getId()).orElse(null);
+
+        if (product != null) {
+            product.setName(productManagerDTO.getName());
+            product.setDescription(productManagerDTO.getDescription());
+            productRepository.save(product);
+
+            if (!product.getListImage().isEmpty()) {
+                Image image = product.getListImage().get(0);
+                image.setImage(productManagerDTO.getImage());
+                image.setProduct(product);
+                imageRepository.save(image);
+            }
+
+            if (!product.getListProduct().isEmpty()) {
+                ProductDetail productDetail = product.getListProduct().get(0);
+                Category category = categoryRepository.getById(productManagerDTO.getCategory());
+                Color color = colorRepository.getById(productManagerDTO.getColor());
+                Origin origin = originRepository.getById(productManagerDTO.getOrigin());
+                Size size = sizeRepository.getById(productManagerDTO.getSize());
+
+                productDetail.setCategory(category);
+                productDetail.setColor(color);
+                productDetail.setOrigin(origin);
+                productDetail.setSize(size);
+                productDetail.setQuantity(productManagerDTO.getQuantity());
+                productDetail.setPrice(productManagerDTO.getPrice());
+                productDetailRepository.save(productDetail);
+            }
+        }
+    }
+
+    @Override
+    public ProductViewDTO selectAllProduct(Integer id) {
+        List<Object[]> listObjects = productDetailRepository.detailProductById(id);
+        Object[] list = listObjects.get(0);
+        Integer ids = (Integer) list[0];
+        String name = (String) list[1];
+        String color = (String) list[2];
+        Integer size = (Integer) list[3];
+        String category = (String) list[4];
+        String origin = (String) list[5];
+        Integer quantity = (Integer) list[6];
+        Float price = (Float) list[7];
+        String description = (String) list[8];
+        String image = (String) list[9];
+        ProductViewDTO productViewDTO = new ProductViewDTO(ids, name, color, size, category, origin, quantity, price, description, image);
+        return productViewDTO;
+    }
+
+    @Override
+    public List<ProductViewDTO> findByProduct(String name) {
+        List<Object[]> listObjects = productDetailRepository.findByProduct(name);
+        List<ProductViewDTO> productManagerDTOList = new ArrayList<>();
+        for (Object[] list : listObjects) {
+            Integer id = (Integer) list[0];
+            String ten = (String) list[1];
+            String color = (String) list[2];
+            Integer size = (Integer) list[3];
+            String category = (String) list[4];
+            String origin = (String) list[5];
+            Integer quantity = (Integer) list[6];
+            Float price = (Float) list[7];
+            String description = (String) list[8];
+            String image = (String) list[9];
+            ProductViewDTO productViewDTO = new ProductViewDTO(id, ten, color, size, category, origin, quantity, price, description, image);
+            productManagerDTOList.add(productViewDTO);
         }
         return productManagerDTOList;
     }
 
     @Override
-    public Integer countProduct(){
-        Integer productList = productRepository.countProduct();
-        return productList;
+    public boolean delete(Integer id) {
+        Product product = productRepository.getById(id);
+        Optional<ProductDetail> productDetail = productDetailRepository.findById(product.getId());
+        if (productDetail.isPresent()) {
+            productDetailRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

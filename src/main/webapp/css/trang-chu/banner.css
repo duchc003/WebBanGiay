@@ -4,3 +4,6 @@
 section.bg-light {
     background-color: cornsilk !important;
 }
+.content-section {
+    margin-top: 0px; /* Điều chỉnh khoảng cách tùy theo nhu cầu */
+}

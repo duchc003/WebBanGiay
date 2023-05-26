@@ -34,5 +34,5 @@ public class DiscountProduct {
     private Float soTienConLai;
 
     @Column(name = "status")
-    private String status;
+    private Integer status;
 }

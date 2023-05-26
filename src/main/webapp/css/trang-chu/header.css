@@ -86,3 +86,14 @@ input.form-control {
 .row.justify-content-end {
     padding-top: 22px;
 }
+.header-top{
+    height: 20px;
+    background-color: #0CBEF0 !important;
+    padding-bottom: 27px;
+}
+ul.nav.justify-content-end {
+    padding-right: 50px;
+}
+a.nav-link.header {
+    font-size: .8125rem;
+}

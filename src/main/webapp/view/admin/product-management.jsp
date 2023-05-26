@@ -42,91 +42,89 @@
         a.nav-link:hover {
             color: coral;
         }
+        img {
+            width: 50px;
+        }
     </style>
 </head>
 <body>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Shoe Store</a>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/product/hien-thi">Shoe Store</a>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">Sign out</a>
+            <a class="nav-link px-3" href="/dang-nhap/logout">Sign out</a>
         </div>
     </div>
 </header>
+<c:if test="${not empty message}">
+    <div class="alert alert-danger">
+            ${message}
+        <c:remove var="message" scope="session" />
+    </div>
+</c:if>
+<c:if test="${not empty error}">
+    <div class="alert alert-danger">
+            ${error}
+        <c:remove var="error" scope="session" />
+    </div>
+</c:if>
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-home" aria-hidden="true">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                            </svg>
+                        <a class="nav-link" href="/admin/dashboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-file" aria-hidden="true">
-                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                <polyline points="13 2 13 9 20 9"></polyline>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                             Orders
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/product-manager/hien-thi">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                            </svg>
+                        <a class="nav-link" href="/product-manager/hien-thi-product">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                             Products
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/discount/hien-thi">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Discount
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-users" aria-hidden="true">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                             Customers
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-bar-chart-2" aria-hidden="true">
-                                <line x1="18" y1="20" x2="18" y2="10"></line>
-                                <line x1="12" y1="20" x2="12" y2="4"></line>
-                                <line x1="6" y1="20" x2="6" y2="14"></line>
-                            </svg>
-                            Reports
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Origin
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
-                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                <polyline points="2 17 12 22 22 17"></polyline>
-                                <polyline points="2 12 12 17 22 12"></polyline>
-                            </svg>
-                            Integrations
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Category
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Image
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Size
                         </a>
                     </li>
                 </ul>
@@ -145,9 +143,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3">
-                        <form class="form-inline" action="/product/search" method="get">
+                        <form class="form-inline" action="/product-manager/hien-thi-product/search" method="get">
                             <div class="input-group find-product">
-                                <input type="text" class="form-control " name="name" placeholder="Tìm kiếm">
+                                <input type="text" class="form-control" name="name" placeholder="Tìm kiếm" />
                                 <button type="submit" class="btn btn-warning">Tìm kiếm</button>
                             </div>
                         </form>
@@ -155,8 +153,8 @@
                     <div class="col-3">
                         <select class="form-select" aria-label="Default select example">
                             <option>Vui Lòng Chọn</option>
-                            <c:forEach items="${listCategory}" var="category">
-                                <option value="${category.id}">${category.name}</option>
+                            <c:forEach items="${categoryIds}" var="category">
+                                <option value="${category.key}">${category.value}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -166,7 +164,7 @@
                         </h6>
                     </div>
                     <div class="col-3">
-                        <a href="/admin/product-manager/view-create" type="submit" class="btn btn-warning">ADD
+                        <a href="/product-manager/view-create" type="submit" class="btn btn-warning">ADD
                         </a>
                     </div>
                 </div>
@@ -176,7 +174,6 @@
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Color</th>
                         <th scope="col">Size</th>
@@ -184,7 +181,6 @@
                         <th scope="col">Origin</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Description</th>
                         <th scope="col">Image</th>
                         <th scope="col">Session</th>
                     </tr>
@@ -192,7 +188,6 @@
                     <tbody>
                     <c:forEach var="list" items="${productDetailDTOList}" varStatus="i">
                         <tr>
-                            <td>${i.index}</td>
                             <td>${list.name}</td>
                             <td>${list.color}</td>
                             <td>${list.size}</td>
@@ -200,20 +195,61 @@
                             <td>${list.origin}</td>
                             <td>${list.quantity}</td>
                             <td>${list.price}</td>
-                            <td>${list.description}</td>
-                            <td>${list.image}</td>
+                            <td><img src="${list.image}" alt="">
+                            </td>
                             <td>
-                                <a href="/admin/product-manager/view-update" type="submit" class="btn btn-warning">UPDATE</a>
-                                <a href="" type="submit" class="btn btn-warning">DELETE</a>
+                                <a href="/product-manager/view-update/${list.id}"
+                                   class="btn btn-warning papding">UPDATE</a>
+                                <a onclick="confirmDelete(${list.id})"  class="btn btn-warning">DELETE</a>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
+            <div class="row phan-trang">
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <ul class="pagination main-pager">
+                        <c:if test="${results.number  > 0}">
+                            <li class="page-item previous-center">
+                                <a class="page-link" href="/product-manager/hien-thi-product?pageNumber=${results.number - 1}">Previous</a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <ul class="pagination main-pager">
+                        <li class="page-item previous">
+                            <form action="/product/view-product" method="get">
+                                <input type="number" id="input-value" name="number" min="${results.number + 1}" max="${results.totalPages}"
+                                       style="width: 40px; border: none; appearance: none; text-align: center;"
+                                       value="${results.number + 1}">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <ul class="pagination main-pager">
+                        <li class="page-item previous-center">
+                            <c:if test="${results.number < results.totalPages - 1}">
+                                <a class="page-link" href="/product-manager/hien-thi-product?pageNumber=${results.number + 1}">Next</a>
+                            </c:if>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </main>
     </div>
 </div>
 </body>
+<script>
+    function confirmDelete(productId){
+        if (confirm("Bạn có muốn xóa sản phẩm này không")){
+            window.location.href = '/product-manager/delete/' + productId;
+        }else{
+
+        }
+    }
+</script>
 <script src="/js/bootstrap.js"></script>
 </html>

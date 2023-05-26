@@ -24,6 +24,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
-    private List<Account> listAccount;
+    @OneToOne
+    @JoinColumn(name = "Id")
+    private User user;
 }

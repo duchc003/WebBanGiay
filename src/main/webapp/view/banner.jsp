@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/css/trang-chu/banner.css">
 </head>
 <body>
-<section class="bg-light">
+<section class="bg-light content-section">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -21,16 +21,8 @@
           <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="/image/3c449a99897467.5efccf73e97bf.jpg"
-                     alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="/image/3c449a99897467.5efccf73e97bf.jpg"
-                     alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="/image/3c449a99897467.5efccf73e97bf.jpg"
-                     alt="Third slide">
+                <img class="d-block w-100" src="https://intphcm.com/data/upload/banner-quang-cao-giay.jpg"
+                     alt="First slide" style="height: 438px;">
               </div>
             </div>
           </div>
@@ -41,16 +33,8 @@
           <div class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="/image/af65308385359fcac08d61a65a04a162.jpg"
-                     alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="/image/af65308385359fcac08d61a65a04a162.jpg"
+                <img class="d-block w-100" src="https://i.pinimg.com/564x/05/db/ba/05dbba14b796ca57622c166e904f993f.jpg"
                      alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="/image/af65308385359fcac08d61a65a04a162.jpg"
-                     alt="Third slide">
               </div>
             </div>
           </div>

@@ -21,7 +21,7 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "Id_customer",referencedColumnName = "ID")
-    private Account account;
+    private User user;
 
     @Column(name = "unit_price")
     private Float unitPrice;

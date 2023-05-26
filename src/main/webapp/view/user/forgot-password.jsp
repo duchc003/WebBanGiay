@@ -37,8 +37,7 @@
             </div>
             <a href="#" class="btn btn-primary w-100">Reset password</a>
             <div class="d-flex justify-content-between mt-4">
-                <a class="" href="#">Login</a>
-                <a class="" href="#">Register</a>
+                <a class="" href="/dang-nhap/form">Login</a>
             </div>
         </div>
     </div>

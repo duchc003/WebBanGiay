@@ -38,10 +38,10 @@ public class Discount {
     private Integer cashDiscount;
 
     @Column(name = "dtatus")
-    private String status;
+    private Integer status;
 
     @Column(name = "discount_type")
-    private String discountType;
+    private Integer discountType;
 
     @OneToMany(mappedBy = "discount",fetch = FetchType.LAZY)
     private List<DiscountProduct> listDiscountProduct;

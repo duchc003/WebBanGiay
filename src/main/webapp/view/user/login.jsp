@@ -14,17 +14,17 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-<c:if test="${!empty message}">
-    <div class="alert alert-primary" role="alert">
+<c:if test="${not empty message}">
+    <div class="alert alert-danger">
             ${message}
+        <c:remove var="message" scope="session" />
     </div>
-    <c:remove var="message" scope="session"></c:remove>
 </c:if>
-<c:if test="${!empty error}">
-    <div class="alert alert-primary" role="alert">
+<c:if test="${not empty error}">
+    <div class="alert alert-danger">
             ${error}
+        <c:remove var="error" scope="session" />
     </div>
-    <c:remove var="error" scope="session"></c:remove>
 </c:if>
 <section class="vh-100">
     <div class="container-fluid">
@@ -36,18 +36,18 @@
                         <div class="form-outline mb-4">
                             <label class="form-label">Username</label>
                             <form:input type="text" path="name" class="form-control form-control-lg" />
-                            <form:errors type="text" path="name" class="form-control form-control-lg" />
+                            <form:errors type="text" path="name" cssClass="text-danger" />
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" >Password</label>
                             <form:input  type="password" path="password" class="form-control form-control-lg" />
-                            <form:errors type="password" path="password" class="form-control form-control-lg" />
+                            <form:errors type="password" path="password" cssClass="text-danger" />
                         </div>
                         <div class="pt-1 mb-4">
                             <form:button type="submit" class="btn btn-warning">Login</form:button>
                         </div>
-                        <p class="small mb-5 pb-lg-2"><a class="text-muted" href="/user/forgot-password">Forgot password?</a></p>
-                        <p>Don't have an account? <a href="/user/register" class="link-info">Register here</a></p>
+                        <p class="small mb-5 pb-lg-2"><a class="text-muted" href="/dang-nhap/forgot-password">Forgot password?</a></p>
+                        <p>Don't have an account? <a href="/dang-nhap/view-register" class="link-info">Register here</a></p>
                     </form:form>
                 </div>
             </div>

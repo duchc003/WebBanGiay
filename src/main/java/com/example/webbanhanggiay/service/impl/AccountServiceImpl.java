@@ -16,27 +16,23 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @Override
     public LoginDTO findByName(String name, String password) {
         User user = accountRepository.findByName(name);
-        return modelMapper.map(user, LoginDTO.class);
+        LoginDTO loginDTO = new LoginDTO();
+        if (user != null) {
+            loginDTO.setName(user.getName());
+            loginDTO.setPassword(user.getPassword());
+        }
+        return loginDTO;
     }
 
     @Override
     public RegisterDTO create(RegisterDTO registerDTO) {
         User user = new User();
-        if (accountRepository.findByEmail(registerDTO.getEmail()) != null) {
-            throw new RuntimeException("Email has been taken");
-        }
-        if (!registerDTO.getPassword().equals(registerDTO.getRepeatPassword())) {
-            throw new RuntimeException("Passwords do not match");
-        }
         user.setName(registerDTO.getName());
         user.setEmail(registerDTO.getEmail());
-        user.setPassword(new BCryptPasswordEncoder().encode(registerDTO.getPassword()));
+        user.setPassword(registerDTO.getPassword());
         user = accountRepository.save(user);
 
         registerDTO.setName(user.getName());

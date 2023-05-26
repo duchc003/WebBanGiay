@@ -12,4 +12,9 @@ public class AdminController {
     public String admin(){
         return "admin/dashboard";
     }
+
+    @GetMapping("customer")
+    public String customer(){
+        return "customer/customer";
+    }
 }
