@@ -24,4 +24,6 @@ public class DiscountDTO {
     private Date ngayBatDau;
 
     private Date ngayKetThuc;
+
+    private Integer trangThai;
 }

@@ -22,6 +22,9 @@ public class Discount {
     @Column(name = "Id")
     private Integer id;
 
+    @Column(name = "ma_discount")
+    private String ma;
+
     @Column(name = "name")
     private String name;
 

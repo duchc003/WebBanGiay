@@ -202,7 +202,7 @@
                 <br>
                 <div class="row">
                     <div class="col-6">
-                        <form:form action="" method="post" modelAttribute="discountDTO">
+                        <form:form action="/discount/create" method="post" modelAttribute="discountDTO">
                             <label class="form-label">Mã Khuyến Mãi : </label>
                             <form:input path="maDiscount" type="text" class="form-control"/>
                             <br>
@@ -222,7 +222,11 @@
                             <label class="form-label">Thời Gian Kết Thúc Giảm Giá : </label>
                             <form:input path="ngayKetThuc" type="date" class="form-control"/>
                             <br>
-                            <form:button type="submit" class="btn btn-warning">Add</form:button>
+                            <label class="form-label">Trạng Thái : </label>
+                            <form:select items="${trangThai}" path="trangThai" type="" class="form-select">
+                            </form:select>
+                            <br>
+                            <form:button type="submit" class="btn btn-warning">ADD</form:button>
                         </form:form>
                     </div>
                     <div class="col-6">
