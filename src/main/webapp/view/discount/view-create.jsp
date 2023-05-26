@@ -198,81 +198,76 @@
                     <div class=""></div>
                 </div>
             </div>
-            <br>
-            <a href="/discount/view-create" type="submit" class="btn btn-warning">ADD</a>
+            <div class="border-1">
+                <br>
+                <div class="row">
+                    <div class="col-6">
+                        <form:form action="/discount/create" method="post" modelAttribute="discountDTO">
+                            <label class="form-label">Mã Khuyến Mãi : </label>
+                            <form:input path="maDiscount" type="text" class="form-control"/>
+                            <br>
+                            <label class="form-label">Tên Chương Trình Khuyến Mãi : </label>
+                            <form:input path="name" type="text" class="form-control"/>
+                            <br>
+                            <label class="form-label">Hình Thức Giảm Giá : </label>
+                            <form:select items="${HinhThucKhuyenMai}" path="hinhThucKhuyenMai" type="" class="form-select">
+                            </form:select>
+                            <br>
+                            <label class="form-label">Mức Giảm Giá : </label>
+                            <form:input path="mucGiamGia" type="number" class="form-control"/>
+                            <br>
+                            <label class="form-label">Thời Gian Bắt Đầu Giảm Giá : </label>
+                            <form:input path="ngayBatDau" type="date" class="form-control"/>
+                            <br>
+                            <label class="form-label">Thời Gian Kết Thúc Giảm Giá : </label>
+                            <form:input path="ngayKetThuc" type="date" class="form-control"/>
+                            <br>
+                            <label class="form-label">Trạng Thái : </label>
+                            <form:select items="${trangThai}" path="trangThai" type="" class="form-select">
+                            </form:select>
+                            <br>
+                            <form:button type="submit" class="btn btn-warning">ADD</form:button>
+                        </form:form>
+                    </div>
+                    <div class="col-6">
+                        <div class="">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <input type="checkbox" onclick="toggleAll(this)">
+                                    </th>
+                                    <th scope="col">Tên Sản Phẩm</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="list" items="${list}">
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>${list.name}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
             <hr>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th scope="col">Mã Khuyến Mãi</th>
-                        <th scope="col">Tên Chương Trình</th>
-                        <th scope="col">Hình Thức Giảm Giá</th>
-                        <th scope="col">Giảm Giá</th>
-                        <th scope="col">Sản Phẩm</th>
-                        <th scope="col">Ngày Bắt Đầu</th>
-                        <th scope="col">Ngày Kết Thúc</th>
-                        <th scope="col">Trạng Thái</th>
-                        <th scope="col">Session</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        </td>
-                        <td>
-                            <a href=""
-                               class="btn btn-warning papding">UPDATE</a>
-                            <a class="btn btn-warning">DELETE</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row phan-trang">
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <ul class="pagination main-pager">
-                        <c:if test="${results.number  > 0}">
-                            <li class="page-item previous-center">
-                                <a class="page-link"
-                                   href="/product-manager/hien-thi-product?pageNumber=${results.number - 1}">Previous</a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </div>
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <ul class="pagination main-pager">
-                        <li class="page-item previous">
-                            <form action="/product/view-product" method="get">
-                                <input type="number" id="input-value" name="number" min="${results.number + 1}"
-                                       max="${results.totalPages}"
-                                       style="width: 40px; border: none; appearance: none; text-align: center;"
-                                       value="${results.number + 1}">
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <ul class="pagination main-pager">
-                        <li class="page-item previous-center">
-                            <c:if test="${results.number < results.totalPages - 1}">
-                                <a class="page-link"
-                                   href="/product-manager/hien-thi-product?pageNumber=${results.number + 1}">Next</a>
-                            </c:if>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </main>
     </div>
 </div>
 </body>
+<script>
+    function toggleAll(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== source) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    }
+</script>
 <script src="/js/bootstrap.js"></script>
 </html>

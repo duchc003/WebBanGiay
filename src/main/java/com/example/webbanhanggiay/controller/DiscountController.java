@@ -30,15 +30,22 @@ public class DiscountController {
     public String viewDiscount(Model model) {
         List<Product> results = discountServiceImpl.getAll();
         model.addAttribute("list", results);
-        model.addAttribute("discountDTO",new DiscountDTO());
         return "discount/view-discount";
+    }
+
+    @GetMapping("view-create")
+    public String viewCreateDiscount(Model model){
+        List<Product> results = discountServiceImpl.getAll();
+        model.addAttribute("list", results);
+        model.addAttribute("discountDTO",new DiscountDTO());
+        return "discount/view-create";
     }
 
     @PostMapping("create")
     public String createDiscount(@Valid @ModelAttribute("discountDTO") DiscountDTO discountDTO, BindingResult result, Model model, HttpSession session) {
         try {
             if (result.hasErrors()) {
-                return "discount/view-discount";
+                return "discount/view-create";
             }
             Discount discount = new Discount();
             discountDTO = discountServiceImpl.create(discountDTO, discount);
@@ -48,8 +55,9 @@ public class DiscountController {
         } catch (Exception e) {
             e.printStackTrace();
             session.setAttribute("error", "Thêm Khuyến Mãi Thất Bại");
+            return "discount/view-create";
         }
-        return "discount/view-discount";
+        return "redirect:/discount/hien-thi";
     }
 
     @ModelAttribute("HinhThucKhuyenMai")
