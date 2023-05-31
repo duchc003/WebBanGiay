@@ -15,36 +15,36 @@ import java.util.Objects;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query("SELECT p.name AS name, pd.price AS price, MIN(i.image) AS image " +
+    @Query("SELECT pd.id,p.name AS name, pd.price AS price, MIN(i.image) AS image " +
             "FROM Product p " +
             " JOIN p.listProduct pd " +
-            " JOIN p.listImage i GROUP BY p.name,pd.price")
+            " JOIN p.listImage i GROUP BY pd.id,p.name,pd.price")
     List<Object[]> findAllProductDetails();
 
     Product findByName(String name);
 
-    @Query("SELECT p.name AS name, pd.price AS price, MIN(i.image) AS image " +
+    @Query("SELECT pd.id, p.name AS name, pd.price AS price, MIN(i.image) AS image " +
             "FROM Product p " +
             " JOIN p.listProduct pd " +
-            " JOIN p.listImage i GROUP BY p.name,pd.price")
+            " JOIN p.listImage i GROUP BY pd.id,p.name,pd.price")
     Page<Object[]> findAllPage(Pageable pageable);
 
-    @Query("SELECT p.name AS name, pd.price AS price, MIN(i.image) AS image " +
+    @Query("SELECT pd.id,p.name AS name, pd.price AS price, MIN(i.image) AS image " +
             "FROM Product p " +
             " JOIN p.listProduct pd " +
             " JOIN p.listImage i " +
             " JOIN pd.category c " +
             "WHERE c.id = :id " +
-            "GROUP BY p.name, pd.price")
+            "GROUP BY pd.id,p.name, pd.price")
     Page<Object[]> findAllCategory(@Param("id") Integer id, Pageable pageable);
 
-    @Query("SELECT p.name AS name, pd.price AS price, MIN(i.image) AS image " +
+    @Query("SELECT pd.id,p.name AS name, pd.price AS price, MIN(i.image) AS image " +
             "FROM Product p " +
             " JOIN p.listProduct pd " +
             " JOIN p.listImage i " +
             " JOIN pd.category c " +
             "WHERE c.id = :id " +
-            "GROUP BY p.name, pd.price")
+            "GROUP BY pd.id,p.name, pd.price")
     List<Object[]> getAllProduct(@Param("id") Integer id);
 
     @Query("SELECT p.name, pd.price, p.description, cl.name, s.size, MIN(i.image) " +
@@ -64,9 +64,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "GROUP BY p.name, pd.price")
     List<Object[]> searchByName(@Param("name") String name);
 
-    @Query("SELECT p.name AS name, pd.price AS price, i.image AS image " +
+    @Query("SELECT pd.id,p.name AS name, pd.price AS price, i.image AS image " +
             "FROM Product p " +
             "JOIN p.listProduct pd  " +
             "JOIN p.listImage i where p.name = :name")
     List<Object[]> findByImage(@Param("name") String name);
+
+    @Query("SELECT NEW com.example.webbanhanggiay.dto.ProductDTO(pd.id,p.name, pd.price, MIN(i.image)) " +
+            "FROM Product p " +
+            "JOIN p.listProduct pd " +
+            "JOIN p.listImage i WHERE p.id = :id GROUP BY pd.id,p.name, pd.price")
+    ProductDTO findByPrice(@Param("id") Integer id);
+
 }

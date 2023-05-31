@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +34,12 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDTO> productDTOList = new ArrayList<>();
 
         for (Object[] reObjects : results) {
-            String name = (String) reObjects[0];
-            String image = (String) reObjects[2];
-            Float price = (Float) reObjects[1];
+            Integer id = (Integer) reObjects[0];
+            String name = (String) reObjects[1];
+            BigDecimal price = (BigDecimal) reObjects[2];
+            String image = (String) reObjects[3];
 
-            ProductDTO productDTO = new ProductDTO(name, price, image);
+            ProductDTO productDTO = new ProductDTO(id,name, price, image);
             productDTOList.add(productDTO);
         }
 
@@ -64,15 +66,16 @@ public class ProductServiceImpl implements ProductService {
         List<Object[]> listObjects = pageObjects.getContent();
         List<ProductDTO> productDTOList = listObjects.stream()
                 .map(objects -> new ProductDTO(
-                        (String) objects[0],
-                        (Float) objects[1],
-                        (String) objects[2]))
+                        (Integer) objects[0],
+                        (String) objects[1],
+                        (BigDecimal) objects[2],
+                        (String) objects[3]))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageable, pageObjects.getTotalElements());
     }
 
     @Override
-    public Page<ProductDTO> getAllByProduct(Integer categoryId, Integer pageNo, Integer pageSize) {
+    public Page<ProductDTO> getAllByProduct(Integer id, Integer pageNo, Integer pageSize) {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
@@ -80,13 +83,14 @@ public class ProductServiceImpl implements ProductService {
             pageSize = 9;
         }
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Object[]> pageObjects = productRepository.findAllCategory(categoryId,pageable);
+        Page<Object[]> pageObjects = productRepository.findAllCategory(id,pageable);
         List<Object[]> listObjects = pageObjects.getContent();
         List<ProductDTO> productDTOList = listObjects.stream()
                 .map(objects -> new ProductDTO(
-                        (String) objects[0],
-                        (Float) objects[1],
-                        (String) objects[2]))
+                        (Integer) objects[0],
+                        (String) objects[1],
+                        (BigDecimal) objects[2],
+                        (String) objects[3]))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageable, pageObjects.getTotalElements());
     }
@@ -96,10 +100,11 @@ public class ProductServiceImpl implements ProductService {
         List<Object[]> getAllProduct = productRepository.getAllProduct(categoryId);
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (Object[] list : getAllProduct) {
-            String ten = (String) list[0];
-            Float price = (Float) list[1];
-            String image = (String) list[2];
-            ProductDTO productDTO = new ProductDTO(ten,price,image);
+            Integer id = (Integer) list[0];
+            String ten = (String) list[1];
+            BigDecimal price = (BigDecimal) list[2];
+            String image = (String) list[3];
+            ProductDTO productDTO = new ProductDTO(id,ten,price,image);
             productDTOList.add(productDTO);
         }
         return productDTOList;
@@ -110,10 +115,11 @@ public class ProductServiceImpl implements ProductService {
         List<Object[]> listObjects = productRepository.findByImage(name);
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (Object[] list : listObjects) {
-            String ten = (String) list[0];
-            Float price = (Float) list[1];
-            String image = (String) list[2];
-            ProductDTO productDTO = new ProductDTO(ten,price,image);
+            Integer id = (Integer) list[0];
+            String ten = (String) list[1];
+            BigDecimal price = (BigDecimal) list[2];
+            String image = (String) list[3];
+            ProductDTO productDTO = new ProductDTO(id,ten,price,image);
             productDTOList.add(productDTO);
         }
         return productDTOList;
@@ -124,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
         List<Object[]> result = productRepository.getOneDetailProduct(name);
         Object[] row = result.get(0);
         String ten = (String) row[0];
-        Float price = (Float) row[1];
+        BigDecimal price = (BigDecimal) row[1];
         String description = (String) row[2];
         String color = (String) row[3];
         Integer size = (Integer) row[4];
@@ -137,10 +143,11 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO searchByName(String name) {
         List<Object[]> result = productRepository.searchByName(name);
         Object[] row = result.get(0);
-        String ten = (String) row[0];
-        String image = (String) row[1];
-        Float price = (Float) row[2];
-        ProductDTO productDTO = new ProductDTO(ten, price, image);
+        Integer id = (Integer) row[0];
+        String ten = (String) row[1];
+        BigDecimal price = (BigDecimal) row[2];
+        String image = (String) row[3];
+        ProductDTO productDTO = new ProductDTO(id,ten, price, image);
         return productDTO;
     }
 

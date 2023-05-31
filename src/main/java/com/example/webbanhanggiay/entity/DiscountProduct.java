@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,14 +26,14 @@ public class DiscountProduct {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "Id_discount",referencedColumnName = "ID")
+    @JoinColumn(name = "Id_voucher",referencedColumnName = "ID")
     private Discount discount;
 
     @Column(name = "unit_price")
-    private Float unitPrice;
+    private BigDecimal unitPrice;
 
     @Column(name = "so_tien_con_lai")
-    private Float soTienConLai;
+    private BigDecimal soTienConLai;
 
     @Column(name = "status")
     private Integer status;

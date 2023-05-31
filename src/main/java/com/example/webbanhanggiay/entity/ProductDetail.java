@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -45,13 +46,13 @@ public class ProductDetail {
     private Integer quantity;
 
     @Column(name = "price")
-    private Float price;
+    private BigDecimal price;
 
     @Column(name = "import_price")
-    private Float importPrice;
+    private BigDecimal importPrice;
 
     @Column(name = "selling_price")
-    private Float sellingPrice;
+    private BigDecimal sellingPrice;
 
     @Column(name = "status")
     private String status;

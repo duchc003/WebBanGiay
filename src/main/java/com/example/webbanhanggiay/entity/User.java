@@ -22,7 +22,13 @@ public class User {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "ho_va_ten")
+    private String hoVaTen;
+
+    @Column(name = "gender")
+    private Integer gender;
+
+    @Column(name = "taikhoan")
     private String name;
 
     @Column(name = "email")
@@ -45,6 +51,12 @@ public class User {
 
     @Column(name = "status")
     private String status;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "ngay_sinh")
+    private String ngaySinh;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Oder> listOder;

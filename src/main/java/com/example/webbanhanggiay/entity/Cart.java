@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,5 +26,5 @@ public class Cart {
     private User user;
 
     @Column(name = "unit_price")
-    private Float unitPrice;
+    private BigDecimal unitPrice;
 }

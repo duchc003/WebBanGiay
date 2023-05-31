@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,7 +40,7 @@ public class ProductManagerDTO {
 
     @NotNull(message = "Price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
-    private Float price;
+    private BigDecimal price;
 
     @NotBlank(message = "Description is required")
     private String description;

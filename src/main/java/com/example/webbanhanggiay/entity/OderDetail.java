@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -45,5 +46,5 @@ public class OderDetail {
     private Date dateFix;
 
     @Column(name = "total_money")
-    private Float totalMoney;
+    private BigDecimal totalMoney;
 }

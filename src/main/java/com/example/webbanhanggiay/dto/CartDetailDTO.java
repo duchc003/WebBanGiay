@@ -11,13 +11,15 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO {
+public class CartDetailDTO {
 
-    private Integer id;
+    private String image;
 
     private String name;
 
+    private BigDecimal unitPrice;
+
     private BigDecimal price;
 
-    private String image;
+    private Integer quantity;
 }

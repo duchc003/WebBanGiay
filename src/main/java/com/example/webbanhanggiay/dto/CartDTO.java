@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -15,7 +16,7 @@ public class CartDTO {
 
     private Integer idCustomer;
 
-    private Float unitPrice;
+    private BigDecimal unitPrice;
 
     private Integer idCart;
 

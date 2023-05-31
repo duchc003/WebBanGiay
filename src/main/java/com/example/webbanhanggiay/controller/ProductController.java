@@ -64,8 +64,8 @@ public class ProductController {
         return "forward:/product/hien-thi";
     }
 
-    @GetMapping("view-product/category/{id}")
-    public String findByCategory(@PathVariable("categoryId") Integer id,
+    @GetMapping("category/{id}")
+    public String findByCategory(@PathVariable("id") Integer id,
                                  @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
                                  @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize,
                                  Model model) {
@@ -78,6 +78,6 @@ public class ProductController {
         model.addAttribute("productList", productList);
         model.addAttribute("results", results);
         model.addAttribute("categoryList", categoryList);
-        return "forward:/product/view-product";
+        return "/product/product";
     }
 }

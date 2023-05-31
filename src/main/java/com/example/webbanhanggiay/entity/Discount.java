@@ -40,7 +40,7 @@ public class Discount {
     @Column(name = "cash_discount")
     private Integer cashDiscount;
 
-    @Column(name = "dtatus")
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "discount_type")

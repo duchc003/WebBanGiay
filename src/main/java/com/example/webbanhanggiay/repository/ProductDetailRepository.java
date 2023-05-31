@@ -56,7 +56,4 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail,Int
             "WHERE p.name like %:name% GROUP BY p.id,p.name,cl.name,s.size,c.name,o.name,pd.quantity,pd.price,p.description")
     List<Object[]> findByProduct(@Param("name") String name);
 
-    @Query("Select pd.id FROM Product p JOIN p.listProduct pd")
-    ProductDetail finByName(@Param("name") String name);
-
 }

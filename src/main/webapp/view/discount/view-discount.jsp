@@ -212,27 +212,29 @@
                         <th scope="col">Sản Phẩm</th>
                         <th scope="col">Ngày Bắt Đầu</th>
                         <th scope="col">Ngày Kết Thúc</th>
-                        <th scope="col">Trạng Thái</th>
                         <th scope="col">Session</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        </td>
-                        <td>
-                            <a href=""
-                               class="btn btn-warning papding">UPDATE</a>
-                            <a class="btn btn-warning">DELETE</a>
-                        </td>
-                    </tr>
+                    <c:forEach items="${list}" var="d">
+                        <tr>
+                            <td>${d.maKM}</td>
+                            <td>${d.tenChuongTrinh}</td>
+                            <td>${d.hinhThucKhuyenMai == 1 ? "Giảm Theo Số Tiền" : "Giảm Theo %"}</td>
+                            <td>${d.giamGia}</td>
+                            <td>${d.tenSanPham}</td>
+                            <td>${d.ngayBatDau}</td>
+                            <td>${d.ngayKetThuc}</td>
+                            </td>
+                            <td>
+                                <a href="/discount/view-update/${d.maKM}"
+                                   class="btn btn-warning papding">UPDATE</a>
+                                <br>
+                                <br>
+                                <a class="btn btn-warning">DELETE</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

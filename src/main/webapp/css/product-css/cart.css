@@ -2,3 +2,60 @@ section.cart-body {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+.mXmGu\+ {
+    display: flex;
+    margin-right: 100px;
+}
+.mJX7hG {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .1s cubic-bezier(.4,0,.6,1);
+    border: 1px solid rgba(0,0,0,.09);
+    border-radius: 2px;
+    background: transparent;
+    color: rgba(0,0,0,.8);
+    width: 32px;
+    height: 32px;
+}
+.mJX7hG .shopee-svg-icon {
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+}
+._8BP9GU {
+    width: 50px;
+    height: 32px;
+    border-left: 0;
+    border-right: 0;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: text;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+.vWt6ZL {
+    color: rgba(0,0,0,.54);
+    text-decoration: line-through;
+}
+.M-AAFK {
+    margin-right: 15px;
+    margin-left: 40px;
+}
+.M-AAFK:last-child {
+    margin: 0;
+    margin-right: 20px;
+}
+h5, .h5 {
+    font-size: 15px;
+}

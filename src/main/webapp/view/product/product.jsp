@@ -26,7 +26,7 @@
                         <c:forEach var="category" items="${categoryList}">
                             <a
                                     type="submit"
-                                    href="/product/view-product/category/${category.id}"
+                                    href="/product/category/${category.id}"
                                     class="list-group-item list-group-item-action"
                             >
                                     ${category.name}

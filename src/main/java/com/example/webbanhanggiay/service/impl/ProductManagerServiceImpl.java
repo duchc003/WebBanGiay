@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -102,7 +103,7 @@ public class ProductManagerServiceImpl implements ProductManagerService {
                         (String) objects[4],
                         (String) objects[5],
                         (Integer) objects[6],
-                        (Float) objects[7],
+                        (BigDecimal) objects[7],
                         (String) objects[8],
                         (String) objects[9]))
                 .collect(Collectors.toList());
@@ -160,7 +161,7 @@ public class ProductManagerServiceImpl implements ProductManagerService {
         String category = (String) list[4];
         String origin = (String) list[5];
         Integer quantity = (Integer) list[6];
-        Float price = (Float) list[7];
+        BigDecimal price = (BigDecimal) list[7];
         String description = (String) list[8];
         String image = (String) list[9];
         ProductViewDTO productViewDTO = new ProductViewDTO(ids, name, color, size, category, origin, quantity, price, description, image);
@@ -179,7 +180,7 @@ public class ProductManagerServiceImpl implements ProductManagerService {
             String category = (String) list[4];
             String origin = (String) list[5];
             Integer quantity = (Integer) list[6];
-            Float price = (Float) list[7];
+            BigDecimal price = (BigDecimal) list[7];
             String description = (String) list[8];
             String image = (String) list[9];
             ProductViewDTO productViewDTO = new ProductViewDTO(id, ten, color, size, category, origin, quantity, price, description, image);

@@ -1,19 +1,17 @@
 package com.example.webbanhanggiay.controller;
 
 import com.example.webbanhanggiay.dto.DiscountDTO;
-import com.example.webbanhanggiay.entity.Discount;
+import com.example.webbanhanggiay.dto.DiscountDetailDTO;
 import com.example.webbanhanggiay.entity.Product;
 import com.example.webbanhanggiay.service.impl.DiscountServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +25,13 @@ public class DiscountController {
     private DiscountServiceImpl discountServiceImpl;
 
     @GetMapping("hien-thi")
-    public String viewDiscount(Model model) {
-        List<Product> results = discountServiceImpl.getAll();
-        model.addAttribute("list", results);
+    public String viewDiscount(@RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
+                               @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize,
+                               Model model) {
+        Page<DiscountDetailDTO> page = discountServiceImpl.getAllDtos(pageNumber,pageSize);
+        List<DiscountDetailDTO> discountDetailDTOList = page.getContent();
+        model.addAttribute("list", discountDetailDTOList);
+        model.addAttribute("results", page);
         return "discount/view-discount";
     }
 
@@ -42,22 +44,42 @@ public class DiscountController {
     }
 
     @PostMapping("create")
-    public String createDiscount(@Valid @ModelAttribute("discountDTO") DiscountDTO discountDTO, BindingResult result, Model model, HttpSession session) {
+    public String createDiscount(@Valid @ModelAttribute("discountDTO") DiscountDTO discountDTO,
+                                 @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
+                                 @RequestParam(value = "pageSize", defaultValue = "9") Integer pageSize,
+                                 BindingResult result, Model model, HttpSession session) {
         try {
             if (result.hasErrors()) {
                 return "discount/view-create";
             }
-            Discount discount = new Discount();
-            discountDTO = discountServiceImpl.create(discountDTO, discount);
-            List<Product> results = discountServiceImpl.getAll();
-            model.addAttribute("list", results);
+            discountDTO = discountServiceImpl.create(discountDTO);
+            Page<DiscountDetailDTO> page = discountServiceImpl.getAllDtos(pageNumber,pageSize);
+            List<DiscountDetailDTO> discountDetailDTOList = page.getContent();
+            model.addAttribute("list", discountDetailDTOList);
+            model.addAttribute("results", page);
             session.setAttribute("message", "Thêm Khuyến Mãi Thành Công");
         } catch (Exception e) {
             e.printStackTrace();
             session.setAttribute("error", "Thêm Khuyến Mãi Thất Bại");
+            List<Product> results = discountServiceImpl.getAll();
+            model.addAttribute("list", results);
             return "discount/view-create";
         }
         return "redirect:/discount/hien-thi";
+    }
+
+    @GetMapping("view-update/{ma}")
+    public String detailDiscount(@PathVariable("ma") String ma, Model model) {
+        DiscountDetailDTO discountDetailDTO = discountServiceImpl.getOneDetailDiscount(ma);
+        List<Product> results = discountServiceImpl.getAll();
+        if (discountDetailDTO == null) {
+            // Xử lý trường hợp không tìm thấy chi tiết khuyến mãi
+            return "error"; // hoặc bạn có thể chuyển hướng hoặc hiển thị thông báo lỗi phù hợp
+        }
+        model.addAttribute("list", results);
+        model.addAttribute("discountDetailDTO", discountDetailDTO);
+        model.addAttribute("discountDTO", new DiscountDetailDTO());
+        return "discount/view-update";
     }
 
     @ModelAttribute("HinhThucKhuyenMai")

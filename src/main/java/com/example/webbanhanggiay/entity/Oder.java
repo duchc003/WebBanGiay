@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class Oder {
     private Date ngayNhanHang;
 
     @Column(name = "thanh_tien")
-    private Float thanhTien;
+    private BigDecimal thanhTien;
 
     @Column(name = "ghi_chu")
     private String ghiChu;

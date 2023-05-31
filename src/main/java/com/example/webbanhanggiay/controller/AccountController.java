@@ -2,7 +2,8 @@ package com.example.webbanhanggiay.controller;
 
 import com.example.webbanhanggiay.dto.LoginDTO;
 import com.example.webbanhanggiay.dto.RegisterDTO;
-import com.example.webbanhanggiay.service.impl.AccountServiceImpl;
+import com.example.webbanhanggiay.entity.User;
+import com.example.webbanhanggiay.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     @Autowired
-    private AccountServiceImpl accountService;
+    private UserServiceImpl accountService;
 
     @Autowired
     private HttpSession session;
@@ -35,7 +36,7 @@ public class AccountController {
             if (result.hasErrors()) {
                 return "/user/login";
             } else {
-                LoginDTO loggedInUser = accountService.findByName(loginDTO.getName(), loginDTO.getPassword());
+                User loggedInUser = accountService.findByName(loginDTO.getName(), loginDTO.getPassword());
                 if (loggedInUser != null && loggedInUser.getName() != null && loggedInUser.getPassword() != null &&
                         loggedInUser.getName().equals(loginDTO.getName()) && loggedInUser.getPassword().equals(loginDTO.getPassword())) {
                     session.setAttribute("loggedInUser", loggedInUser);

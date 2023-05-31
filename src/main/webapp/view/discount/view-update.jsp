@@ -204,12 +204,12 @@
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label">Mã Khuyến Mãi : </label>
-                            <form:input path="maDiscount" type="text" class="form-control"/>
-                            <form:errors path="maDiscount" cssClass="text-danger"/>
+                            <form:input path="maKM" value="${discountDetailDTO.maKM}" type="text" class="form-control"/>
+                            <form:errors path="maKM" cssClass="text-danger"/>
                             <br>
                             <label class="form-label">Tên Chương Trình Khuyến Mãi : </label>
-                            <form:input path="name" type="text" class="form-control"/>
-                            <form:errors path="name" cssClass="text-danger"/>
+                            <form:input path="tenChuongTrinh" value="${discountDetailDTO.tenChuongTrinh}" type="text" class="form-control"/>
+                            <form:errors path="tenChuongTrinh" cssClass="text-danger"/>
                             <br>
                             <label class="form-label">Hình Thức Giảm Giá : </label>
                             <form:select items="${HinhThucKhuyenMai}" path="hinhThucKhuyenMai" type=""
@@ -217,16 +217,20 @@
                             </form:select>
                             <br>
                             <label class="form-label">Mức Giảm Giá : </label>
-                            <form:input path="mucGiamGia" type="number" class="form-control"/>
-                            <form:errors path="mucGiamGia" cssClass="text-danger"/>
+                            <form:input path="giamGia" type="number" value="${discountDetailDTO.giamGia}" class="form-control"/>
+                            <form:errors path="giamGia" cssClass="text-danger"/>
                             <br>
                             <label class="form-label">Thời Gian Bắt Đầu Giảm Giá : </label>
-                            <form:input path="ngayBatDau" type="date" class="form-control" pattern="yyyy-MM-dd"/>
+                            <form:input path="ngayBatDau" type="date" value="${discountDetailDTO.ngayBatDau}" class="form-control" pattern="yyyy-MM-dd"/>
                             <form:errors path="ngayBatDau" cssClass="text-danger"/>
                             <br>
                             <label class="form-label">Thời Gian Kết Thúc Giảm Giá : </label>
-                            <form:input path="ngayKetThuc" type="date" class="form-control" pattern="yyyy-MM-dd"/>
+                            <form:input path="ngayKetThuc" type="date" value="${discountDetailDTO.ngayKetThuc}"  class="form-control" pattern="yyyy-MM-dd"/>
                             <form:errors path="ngayKetThuc" cssClass="text-danger"/>
+                            <br>
+                            <label class="form-label">Trạng Thái : </label>
+                            <form:select items="${trangThai}" path="trangThai" type="" class="form-select">
+                            </form:select>
                             <br>
                             <form:button type="submit" class="btn btn-warning">ADD</form:button>
                         </div>
@@ -243,7 +247,7 @@
                                     <c:forEach var="product" items="${list}">
                                         <tr>
                                             <td>
-                                                <form:checkbox path="idSanPham" value="${product.id}" />
+                                                <form:checkbox path="tenChuongTrinh" value="${product.id}" />
                                             </td>
                                             <td>${product.name}</td>
                                         </tr>

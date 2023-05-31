@@ -53,7 +53,7 @@
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/product/hien-thi">Shoe Store</a>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">Sign out</a>
+            <a class="nav-link px-3" href="/dang-nhap/logout">Sign out</a>
         </div>
     </div>
 </header>
@@ -86,7 +86,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/oder/hien-thi">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-file" aria-hidden="true">
@@ -198,78 +198,72 @@
                     <div class=""></div>
                 </div>
             </div>
-            <div class="border-1">
-                <br>
-                <form:form action="/discount/create" method="POST" modelAttribute="discountDTO">
-                    <div class="row">
-                        <div class="col-6">
-                            <label class="form-label">Mã Khuyến Mãi : </label>
-                            <form:input path="maDiscount" type="text" class="form-control"/>
-                            <form:errors path="maDiscount" cssClass="text-danger"/>
-                            <br>
-                            <label class="form-label">Tên Chương Trình Khuyến Mãi : </label>
-                            <form:input path="name" type="text" class="form-control"/>
-                            <form:errors path="name" cssClass="text-danger"/>
-                            <br>
-                            <label class="form-label">Hình Thức Giảm Giá : </label>
-                            <form:select items="${HinhThucKhuyenMai}" path="hinhThucKhuyenMai" type=""
-                                         class="form-select">
-                            </form:select>
-                            <br>
-                            <label class="form-label">Mức Giảm Giá : </label>
-                            <form:input path="mucGiamGia" type="number" class="form-control"/>
-                            <form:errors path="mucGiamGia" cssClass="text-danger"/>
-                            <br>
-                            <label class="form-label">Thời Gian Bắt Đầu Giảm Giá : </label>
-                            <form:input path="ngayBatDau" type="date" class="form-control" pattern="yyyy-MM-dd"/>
-                            <form:errors path="ngayBatDau" cssClass="text-danger"/>
-                            <br>
-                            <label class="form-label">Thời Gian Kết Thúc Giảm Giá : </label>
-                            <form:input path="ngayKetThuc" type="date" class="form-control" pattern="yyyy-MM-dd"/>
-                            <form:errors path="ngayKetThuc" cssClass="text-danger"/>
-                            <br>
-                            <form:button type="submit" class="btn btn-warning">ADD</form:button>
-                        </div>
-                        <div class="col-6">
-                            <div class="">
-                                <table class="table table-striped table-sm">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Chọn</th>
-                                        <th scope="col">Tên Sản Phẩm</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="product" items="${list}">
-                                        <tr>
-                                            <td>
-                                                <form:checkbox path="idSanPham" value="${product.id}" />
-                                            </td>
-                                            <td>${product.name}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </form:form>
-                <br>
+            <br>
+            <h3>Thông Tin Đơn Hàng</h3>
+            <h3>Người Nhận</h3>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Họ Và Tên</th>
+                        <th scope="col">Số Điện Thoại</th>
+                        <th scope="col">Địa Chỉ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+            <br>
+            <form class="form-inline" action="/product-manager/hien-thi-product/search" method="get">
+                <div class="input-group find-product" style="width: 25%;">
+                    <input type="text" class="form-control" name="name" placeholder="Tìm kiếm"/>
+                    <button type="submit" class="btn btn-warning">Tìm kiếm</button>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Tên Sản Phẩm</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Tồng Tiền</h3>
             <hr>
         </main>
     </div>
 </div>
 </body>
 <script>
-    function toggleAll(source) {
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i] !== source) {
-                checkboxes[i].checked = source.checked;
-            }
+    function confirmDelete(productId) {
+        if (confirm("Bạn có muốn xóa sản phẩm này không")) {
+            window.location.href = '/product-manager/delete/' + productId;
+        } else {
+
         }
     }
 </script>
 <script src="/js/bootstrap.js"></script>
 </html>
+>

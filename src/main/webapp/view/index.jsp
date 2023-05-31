@@ -15,10 +15,16 @@
 </head>
 <body>
 <c:if test="${not empty message}">
-    <div class="alert alert-success">${message}</div>
+    <div class="alert alert-danger">
+            ${message}
+        <c:remove var="message" scope="session"/>
+    </div>
 </c:if>
 <c:if test="${not empty error}">
-    <div class="alert alert-danger">${error}</div>
+    <div class="alert alert-danger">
+            ${error}
+        <c:remove var="error" scope="session"/>
+    </div>
 </c:if>
 <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="banner.jsp"></jsp:include>
@@ -27,26 +33,21 @@
         <h2 class="text-center featured-product">Featured Products</h2>
         <hr/>
         <div class="row">
-            <form action="/cart/create" method="post">
-                <c:forEach var="list" items="${list}">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img
-                                    class="card-img-top"
-                                    src="${list.image}"
-                                    alt="Card image cap"
-                            />
-                            <div class="card-body">
-                                <a href="/product/product-detail/${list.name}" class="card-title">${list.name}</a>
-                                <p class="card-text">
-                                        ${list.price}
-                                </p>
-                                <a type="submit" class="btn btn-primary" name="cartDTO">Add to cart</a>
-                            </div>
+            <c:forEach var="item" items="${list}">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="${item.image}" alt="Card image cap"/>
+                        <div class="card-body">
+                            <a href="/product/product-detail/${item.name}" class="card-title">${item.name}</a>
+                            <p class="card-text">${item.price}</p>
+                            <form action="/cart/create" method="post">
+                                <input type="hidden" name="idProduct" value="${item.id}"/>
+                                <button type="submit" class="btn btn-primary">Add to cart</button>
+                            </form>
                         </div>
                     </div>
-                </c:forEach>
-            </form>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </section>
