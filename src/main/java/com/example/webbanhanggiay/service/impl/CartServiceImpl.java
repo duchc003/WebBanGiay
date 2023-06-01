@@ -52,13 +52,14 @@ public class CartServiceImpl implements CartService {
         List<Object[]> listObjects = cartDetailRepository.getCartDetail(user);
         List<CartDetailDTO> cartDetailDTO = new ArrayList<>();
         for (Object[] x : listObjects) {
-            Integer id = (Integer) x[0];
-            String image = (String) x[1];
-            String productName = (String) x[2];
-            BigDecimal price = (BigDecimal) x[3];
-            Integer quantity = (Integer) x[4];
-            Integer size = (Integer) x[5];
-            CartDetailDTO detailDTO = new CartDetailDTO(id, image, productName, price, quantity,size);
+            Integer idProductDetail = (Integer) x[0];
+            Integer IdCart = (Integer) x[1];
+            String image = (String) x[2];
+            String productName = (String) x[3];
+            BigDecimal price = (BigDecimal) x[4];
+            Integer quantity = (Integer) x[5];
+            Integer size = (Integer) x[6];
+            CartDetailDTO detailDTO = new CartDetailDTO(idProductDetail,IdCart, image, productName, price, quantity,size);
             cartDetailDTO.add(detailDTO);
         }
         return cartDetailDTO;

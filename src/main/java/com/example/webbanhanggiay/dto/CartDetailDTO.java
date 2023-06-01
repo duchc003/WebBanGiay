@@ -13,7 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CartDetailDTO {
 
-    private Integer id;
+    private Integer idProductDetail;
+
+    private Integer idCart;
 
     private String image;
 

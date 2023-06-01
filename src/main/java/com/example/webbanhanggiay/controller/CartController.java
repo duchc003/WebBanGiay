@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -29,7 +28,7 @@ public class CartController {
         User user = (User) session.getAttribute("loggedInUser");
         List<CartDetailDTO> cartDetailDTOS = cartService.cartDetailDTO(user);
         model.addAttribute("cartDetailDTOS", cartDetailDTOS);
-        return "product/cart";
+        return "customer/cart";
     }
 
     @PostMapping("create")

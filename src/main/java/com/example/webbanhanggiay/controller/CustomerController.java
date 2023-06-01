@@ -68,11 +68,4 @@ public class CustomerController {
         return "customer/khach";
     }
 
-    @GetMapping("view-thanh-toan")
-    public String viewThanhToan(Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        List<CartDetailDTO> cartDetailDTOS = cartService.cartDetailDTO(user);
-        model.addAttribute("cartDetailDTOS", cartDetailDTOS);
-        return "product/view-thanh-toan";
-    }
 }

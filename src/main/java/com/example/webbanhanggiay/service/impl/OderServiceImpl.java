@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 @Service
 public class OderServiceImpl implements OderService {
@@ -42,6 +41,7 @@ public class OderServiceImpl implements OderService {
         modelMapper.map(oderDTO, oder);
         oder.setUser(user);
         oder.setNgayDatHang(timestamp);
+        oder.setStatus(1);
         oderRepository.save(oder);
 
         oderDetail.setOder(oder);

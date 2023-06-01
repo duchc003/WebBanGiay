@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="total" value="0"/>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="org.apache.struts.util.LocalStrings"/>
@@ -21,40 +22,46 @@
 <jsp:include page="/view/header.jsp"></jsp:include>
 <section>
     <div class="container" style="padding-top: 17px;">
+        <form:form action="/oder/create" method="post" modelAttribute="oderDTO">
         <div class="row">
             <div class="col-lg-4">
-                <form>
-                    <div class="checkout-section section-register">
-                        <div class="title section-title">Thông tin giao hàng</div>
-                        <div class="section-body">
-                            <div class="form-group required account-firstname"><label for="input-firstname"
-                                                                                      class="control-label">Họ và
-                                tên:</label> <input type="text" name="firstname" value="" placeholder="Họ và tên:"
-                                                    id="input-firstname" class="form-control"> <!----></div>
-                            <div class="form-group required account-email"><label for="input-email"
-                                                                                  class="control-label">Điện
-                                thoại:</label> <input type="text" name="email" value="" placeholder="Điện thoại:"
-                                                      id="input-email" class="form-control"> <!----></div>
-                            <div class="form-group required account-telephone"><label for="input-telephone"
-                                                                                      class="control-label">Email (nếu
-                                có):</label> <input type="text" name="telephone" value="" placeholder="Email (nếu có):"
-                                                    id="input-telephone" class="form-control"> <!----></div> <!---->
-                        </div>
-                    </div>
-                    <div class="checkout-section payment-address">
-                        <div class="title section-title">Địa chỉ giao hàng</div>
-                        <div class="section-body"><!----> <!----> <!---->
-                            <div>
-                                <div class="form-group required address-address-1">
-                                    <label for="input-payment-address-1" class="control-label">Địa chỉ:</label>
-                                    <input type="text" name="address_1" value="" placeholder="Địa chỉ:"
-                                           id="input-payment-address-1"
-                                           class="form-control">
+                <div class="checkout-section section-register">
+                    <div class="title section-title">Thông tin giao hàng</div>
+                    <div class="section-body">
+                        <div class="form-group required account-firstname">
+                            <label for="input-firstname" class="control-label">Họ và tên:</label>
+                            <form:input type="text" path="recipientName" placeholder="Họ và tên:" id="input-firstname"
+                                        class="form-control"/>
+                            <form:errors path="recipientName" cssClass="text-bg-danger"></form:errors>
+                            <div class="form-group required account-email">
+                                <label for="input-email" class="control-label">Điện thoại:</label>
+                                <form:input type="text" path="phone" placeholder="Điện thoại:" id="input-email"
+                                            class="form-control"/>
+                                <form:errors path="phone" cssClass="text-bg-danger"></form:errors>
+                                <div class="form-group required account-telephone">
+                                    <label for="input-telephone" class="control-label">Email (nếu có):</label>
+                                    <form:input type="text" path="email" value=""
+                                                placeholder="Email (nếu có):"
+                                                id="input-telephone" class="form-control"/>
+                                    <form:errors path="email" cssClass="text-bg-danger"></form:errors>
+                                </div>
+                            </div>
+                            <div class="checkout-section payment-address">
+                                <div class="title section-title">Địa chỉ giao hàng</div>
+                                <div class="section-body">
+                                    <div>
+                                        <div class="form-group required address-address-1">
+                                            <label class="control-label">Địa chỉ:</label>
+                                            <form:input type="text" path="address" placeholder="Địa chỉ:"
+                                                   class="form-control"/>
+                                            <form:errors path="address" cssClass="text-bg-danger"></form:errors>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="col-lg-8">
                 <div class="right">
@@ -67,7 +74,9 @@
                                         <div class="ship-wrapper">
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="shipping_method" value="free.free" onclick="updateShippingCost(0)">
+                                                    <input type="radio" name="shipping_method"
+                                                           value="free.free"
+                                                           onclick="updateShippingCost(0)">
                                                     <span class="shipping-quote-title">Miễn phí giao hàng - 0₫</span>
                                                 </label>
                                             </div>
@@ -79,7 +88,9 @@
                                         <div class="ship-wrapper">
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="shipping_method" value="flat.flat" onclick="updateShippingCost(25000)">
+                                                    <input type="radio" name="shipping_method"
+                                                           value="flat.flat"
+                                                           onclick="updateShippingCost(25000)">
                                                     <span class="shipping-quote-title">Ship siêu tốc - 25.000₫</span>
                                                 </label>
                                             </div>
@@ -102,7 +113,8 @@
                                 <div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="payment_method" value="bank_transfer">
+                                            <input type="radio" name="payment_method"
+                                                   value="bank_transfer">
                                             <span>Chuyển khoản ngân hàng</span>
                                         </label>
                                     </div>
@@ -130,17 +142,32 @@
                                             <td class="text-center td-image"><a href=""><img
                                                     src="${list.image}"
                                                     class="img-thumbnail"></a></td>
-                                            <td class="text-left td-product"><a href="">${list.name}</a>
+                                            <td class="text-left td-product">
+                                                <a href="">
+                                                    <form:input type="hidden" path="idProduct"
+                                                           value="${list.idProductDetail}"/>
+                                                        ${list.name}
+                                                </a>
                                                 <br>
                                                 <small>Chọn size nam: ${list.size}</small>
                                             </td>
                                             <td class="text-left td-qty">
+                                                <form:input type="hidden" path="quantity" value="${list.quantity}"/>
                                                     ${list.quantity}
                                             </td>
-                                            <td class="text-right td-price"><fmt:formatNumber value="${list.price}" pattern="###,###"/> đ</td>
-                                            <td class="text-right td-total"><fmt:formatNumber value="${list.price * list.quantity}" pattern="###,###"/> đ</td>
-                                            <c:set var="subTotal" value="${list.price * list.quantity}" />
-                                            <c:set var="total" value="${total + subTotal}" />
+                                            <td class="text-right td-price"><fmt:formatNumber
+                                                    value="${list.price}"
+                                                    pattern="###,###"/> đ
+                                            </td>
+                                            <td class="text-right td-total">
+                                                <form:input type="hidden" path="totalMoney"
+                                                       value="${list.price * list.quantity}"/>
+                                                <fmt:formatNumber value="${list.price * list.quantity}"
+                                                                  pattern="###,###"/> đ
+                                            </td>
+                                            <c:set var="subTotal"
+                                                   value="${list.price * list.quantity}"/>
+                                            <c:set var="total" value="${total + subTotal}"/>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -150,10 +177,14 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="7" class="text-right"><strong>Thành Tiền</strong></td>
-                                    <td class="text-right"><fmt:formatNumber value="${total}" pattern="###,###"/>đ</td>
+                                    <td class="text-right">
+                                        <form:input type="hidden" path="thanhTien" value="${total}"/>
+                                        <fmt:formatNumber value="${total}" pattern="###,###"/>đ
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-right"><strong>Miễn phí giao hàng:</strong></td>
+                                    <td colspan="7" class="text-right"><strong>Miễn phí giao
+                                        hàng:</strong></td>
                                     <td class="text-right" id="shippingCost">0₫</td>
                                 </tr>
                                 <tr>
@@ -168,7 +199,7 @@
                         <div class="section-body">
                             <div class="buttons confirm-buttons">
                                 <div class="pull-right" style="text-align: center;">
-                                    <button type="button" data-loading-text="<span>MUA HÀNG</span>"
+                                    <button type="submit" data-loading-text="<span>MUA HÀNG</span>"
                                             id="quick-checkout-button-confirm" class="btn btn-primary">
                                         <span>MUA HÀNG</span></button>
                                 </div>
@@ -178,6 +209,7 @@
                 </div>
             </div>
         </div>
+        </form:form>
     </div>
 </section>
 <jsp:include page="/view/footer.jsp"></jsp:include>

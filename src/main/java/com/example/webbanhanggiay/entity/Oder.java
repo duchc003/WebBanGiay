@@ -56,7 +56,7 @@ public class Oder {
     private String ghiChu;
 
     @Column(name = "status")
-    private String status;
+    private Integer status;
 
     @OneToMany(mappedBy = "oder",fetch = FetchType.LAZY)
     private List<OderDetail> listOderDetail;

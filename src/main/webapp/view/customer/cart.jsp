@@ -40,10 +40,10 @@
                             <td><a href=""></a>${list.name} <br>
                                 <small>Chọn size nam: ${list.size}</small></td>
                             <td class="text-center">
-                                <form action="/cart/update/${list.id}" method="post">
+                                <form action="/cart/update/${list.idCart}" method="post">
                                     <div class="mXmGu+ shopee-input-quantity">
                                         <button type="submit" class="mJX7hG"
-                                                onclick="decreaseValue(${loop.index},${list.id})">
+                                                onclick="decreaseValue(${loop.index},${list.idCart})">
                                             -
                                         </button>
                                         <input id="quantityInput${loop.index}"
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="buttons clearfix">
-                <div class="pull-right"><a href="/customer/view-thanh-toan"
+                <div class="pull-right"><a href="/oder/view-thanh-toan"
                                            class="btn btn-primary"><span>Thanh toán</span></a></div>
             </div>
         </div>
