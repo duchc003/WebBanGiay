@@ -52,44 +52,36 @@ public class CartServiceImpl implements CartService {
         List<Object[]> listObjects = cartDetailRepository.getCartDetail(user);
         List<CartDetailDTO> cartDetailDTO = new ArrayList<>();
         for (Object[] x : listObjects) {
-            String image = (String) x[0];
-            String productName = (String) x[1];
-            BigDecimal price = (BigDecimal) x[2];
-            BigDecimal unitPrice = (BigDecimal) x[3];
+            Integer id = (Integer) x[0];
+            String image = (String) x[1];
+            String productName = (String) x[2];
+            BigDecimal price = (BigDecimal) x[3];
             Integer quantity = (Integer) x[4];
-            CartDetailDTO detailDTO = new CartDetailDTO(image, productName, unitPrice, price, quantity);
+            Integer size = (Integer) x[5];
+            CartDetailDTO detailDTO = new CartDetailDTO(id, image, productName, price, quantity,size);
             cartDetailDTO.add(detailDTO);
         }
         return cartDetailDTO;
     }
 
     @Override
-    public CartDetailDTO sumPriceInCart(User user) {
-        List<Object[]> listObjects = cartDetailRepository.sumPriceInCart(user);
-        Object[] objects = listObjects.get(0);
-        String image = (String) objects[0];
-        String name = (String) objects[1];
-        BigDecimal unitPrice = (BigDecimal) objects[2];
-        BigDecimal totalPrice = (BigDecimal) objects[3];
-        Integer quantity = (Integer) objects[4];
-        CartDetailDTO detailDTO = new CartDetailDTO(image, name, unitPrice, totalPrice, quantity);
-        return detailDTO;
-    }
-
-    @Override
-    public CartDetail update(CartDetail cartDetail, User user) {
-        return cartDetailRepository.save(cartDetail);
-    }
-
-    @Override
-    public boolean delete(CartDetail cartDetail, User user) {
-        try {
-            cartDetailRepository.delete(cartDetail);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+    public CartDetail update(Integer id, User user,Integer quantity) {
+        CartDetail cartDetail = cartDetailRepository.findById(id).orElse(null);
+        if (cartDetail != null){
+            cartDetail.setQuantity(quantity);
+            cartDetailRepository.save(cartDetail);
         }
+        return null;
+    }
+
+    @Override
+    public boolean delete(Integer id, User user) {
+        Optional<CartDetail> cartDetail = cartDetailRepository.findById(id);
+        if (cartDetail.isPresent()) {
+            cartDetailRepository.deleteById(cartDetail.get().getId());
+            return true;
+        }
+        return false;
     }
 
 }

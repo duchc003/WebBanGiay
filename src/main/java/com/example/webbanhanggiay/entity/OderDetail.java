@@ -33,9 +33,6 @@ public class OderDetail {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "number_of_product_received")
-    private Integer numberOfProductReceived;
-
     @Column(name = "status")
     private String status;
 

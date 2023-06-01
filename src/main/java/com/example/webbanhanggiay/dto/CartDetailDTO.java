@@ -13,13 +13,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CartDetailDTO {
 
+    private Integer id;
+
     private String image;
 
     private String name;
 
-    private BigDecimal unitPrice;
-
     private BigDecimal price;
 
     private Integer quantity;
+
+    private Integer size;
 }

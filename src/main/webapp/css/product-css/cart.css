@@ -4,7 +4,7 @@ section.cart-body {
 }
 .mXmGu\+ {
     display: flex;
-    margin-right: 100px;
+    padding-top: 25px;
 }
 .mJX7hG {
     outline: none;
@@ -48,14 +48,14 @@ section.cart-body {
     color: rgba(0,0,0,.54);
     text-decoration: line-through;
 }
-.M-AAFK {
-    margin-right: 15px;
-    margin-left: 40px;
-}
-.M-AAFK:last-child {
-    margin: 0;
-    margin-right: 20px;
-}
+/*.M-AAFK {*/
+/*    margin-right: 15px;*/
+/*    margin-left: 40px;*/
+/*}*/
+/*.M-AAFK:last-child {*/
+/*    margin: 0;*/
+/*    margin-right: 20px;*/
+/*}*/
 h5, .h5 {
     font-size: 15px;
 }

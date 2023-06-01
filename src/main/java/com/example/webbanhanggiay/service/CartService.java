@@ -16,10 +16,8 @@ public interface CartService {
 
     List<CartDetailDTO> cartDetailDTO(User user);
 
-    CartDetailDTO sumPriceInCart(User user);
+    CartDetail update(Integer id, User user,Integer quantity);
 
-    CartDetail update(CartDetail cartDetail, User user);
-
-    boolean delete(CartDetail cartDetail, User user);
+    boolean delete(Integer id, User user);
 
 }

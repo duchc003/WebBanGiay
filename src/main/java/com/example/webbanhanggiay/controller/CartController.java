@@ -28,9 +28,7 @@ public class CartController {
     public String viewCart(Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         List<CartDetailDTO> cartDetailDTOS = cartService.cartDetailDTO(user);
-        CartDetailDTO detailDTO = cartService.sumPriceInCart(user);
         model.addAttribute("cartDetailDTOS", cartDetailDTOS);
-        model.addAttribute("total", detailDTO);
         return "product/cart";
     }
 
@@ -48,16 +46,25 @@ public class CartController {
         return "redirect:/product/hien-thi";
     }
 
-    @PostMapping("update")
-    public String updadeQuantityCart(@ModelAttribute("cart") CartDetail cartDetail, @RequestParam("deleteFlag") boolean deleteFlag) {
+    @PostMapping("update/{id}")
+    public String updadeQuantityCart(@PathVariable("id") Integer id, @RequestParam("quantity") Integer quantity) {
         try {
             User user = (User) session.getAttribute("loggedInUser");
-            if (deleteFlag) {
-                cartService.delete(cartDetail, user);
-            } else {
-                cartDetail = cartService.update(cartDetail, user);
-            }
+            CartDetail cartDetail = cartService.update(id, user, quantity);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/cart/hien-thi";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteProductCart(@PathVariable("id") Integer id) {
+        try {
+            User user = (User) session.getAttribute("loggedInUser");
+            cartService.delete(id, user);
+            session.setAttribute("message", "Xóa Thành Công Sản Phẩm Khỏi Giỏ Hàng");
+        } catch (Exception e) {
+            session.setAttribute("message", "Xóa Thành Công Sản Phẩm Khỏi Giỏ Hàng");
             e.printStackTrace();
         }
         return "redirect:/cart/hien-thi";
