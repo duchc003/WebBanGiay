@@ -43,6 +43,7 @@ public class CartServiceImpl implements CartService {
         cartDetail.setProductDetail(existingProduct);
         cartDetail.setDateCreate(timestamp);
         cartDetail.setQuantity(1);
+        cartDetail.setStatus(1);
         cartDetailRepository.save(cartDetail);
         return cartDTO;
     }
@@ -59,7 +60,8 @@ public class CartServiceImpl implements CartService {
             BigDecimal price = (BigDecimal) x[4];
             Integer quantity = (Integer) x[5];
             Integer size = (Integer) x[6];
-            CartDetailDTO detailDTO = new CartDetailDTO(idProductDetail,IdCart, image, productName, price, quantity,size);
+            Integer status = (Integer) x[7];
+            CartDetailDTO detailDTO = new CartDetailDTO(idProductDetail,IdCart, image, productName, price, quantity,size,status);
             cartDetailDTO.add(detailDTO);
         }
         return cartDetailDTO;

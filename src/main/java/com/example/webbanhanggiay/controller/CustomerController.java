@@ -1,8 +1,10 @@
 package com.example.webbanhanggiay.controller;
 
 import com.example.webbanhanggiay.dto.CartDetailDTO;
+import com.example.webbanhanggiay.dto.DonHangDTO;
 import com.example.webbanhanggiay.entity.User;
 import com.example.webbanhanggiay.service.impl.CartServiceImpl;
+import com.example.webbanhanggiay.service.impl.OderServiceImpl;
 import com.example.webbanhanggiay.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class CustomerController {
     private CartServiceImpl cartService;
 
     @Autowired
+    private OderServiceImpl oderService;
+
+    @Autowired
     private HttpSession session;
 
     @GetMapping("all-oder")
@@ -32,31 +37,46 @@ public class CustomerController {
     }
 
     @GetMapping("cho-thanh-toan")
-    public String choThanhToan(){
+    public String choThanhToan(Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+        List<DonHangDTO> donHangDTOList = oderService.choThanhToan(user);
+        model.addAttribute("donHangDTOList",donHangDTOList);
         return "customer/cho-thanh-toan";
     }
 
     @GetMapping("van-chuyen")
-    public String vanChuyen(){
+    public String vanChuyen(Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+        List<DonHangDTO> donHangDTOList = oderService.vanChuyen(user);
+        model.addAttribute("donHangDTOList",donHangDTOList);
         return "customer/van-chuyen";
     }
 
     @GetMapping("dang-giao")
-    public String dangGiao(){
+    public String dangGiao(Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+        List<DonHangDTO> donHangDTOList = oderService.dangGiao(user);
+        model.addAttribute("donHangDTOList",donHangDTOList);
         return "customer/dang-giao";
     }
 
     @GetMapping("hoan-thanh")
-    public String hoanThanh(){
+    public String hoanThanh(Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+        List<DonHangDTO> donHangDTOList = oderService.hoanThanh(user);
+        model.addAttribute("donHangDTOList",donHangDTOList);
         return "customer/hoan-thanh";
 
     }@GetMapping("da-huy")
-    public String daHuy(){
+    public String daHuy(Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+        List<DonHangDTO> donHangDTOList = oderService.daHuy(user);
+        model.addAttribute("donHangDTOList",donHangDTOList);
         return "customer/da-huy";
     }
 
     @GetMapping("traHangHoanTat")
-    public String traHangHoanTat(){
+    public String traHangHoanTat(Model model){
         return "customer/tra-hang-hoan-tien";
     }
 

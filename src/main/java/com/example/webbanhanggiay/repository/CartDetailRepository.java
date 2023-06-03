@@ -10,12 +10,12 @@ import java.util.List;
 
 public interface CartDetailRepository extends JpaRepository<CartDetail, Integer> {
 
-    @Query("Select pd.id,cd.id, MIN(i.image),p.name,pd.price,cd.quantity,s.size FROM CartDetail cd " +
+    @Query("Select pd.id,cd.id, MIN(i.image),p.name,pd.price,cd.quantity,s.size,cd.status FROM CartDetail cd " +
             "JOIN cd.productDetail pd " +
             "JOIN  pd.product p " +
             "JOIN  pd.size s " +
             "JOIN p.listImage i " +
-            "where cd.cart.user = :user GROUP BY pd.id,cd.id,p.name,pd.price,cd.quantity,s.size")
+            "where cd.cart.user = :user AND cd.status = 1 GROUP BY pd.id,cd.id,p.name,pd.price,cd.quantity,s.size,cd.status")
     List<Object[]> getCartDetail(@Param("user") User user);
 
 }

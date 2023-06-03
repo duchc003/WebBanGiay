@@ -31,7 +31,7 @@ public class Oder {
     @JoinColumn(name = "Id_staff",referencedColumnName = "ID")
     private Staff staff;
 
-    @Column(name = "address")
+    @Column(name = "adress")
     private String address;
 
     @Column(name = "recipient_name")

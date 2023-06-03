@@ -6,26 +6,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDetailDTO {
+public class QLDonHangDTO {
 
-    private Integer idProductDetail;
+    private String hoVaTen;
 
-    private Integer idCart;
+    private Integer phone;
 
-    private String image;
+    private Date ngayDatHang;
 
-    private String name;
+    private Date ngayGiaoHang;
 
-    private BigDecimal price;
+    private Date ngayNhanHang;
 
-    private Integer quantity;
-
-    private Integer size;
+    private BigDecimal totalMoney;
 
     private Integer status;
 }

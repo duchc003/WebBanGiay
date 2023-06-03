@@ -37,4 +37,7 @@ public class CartDetail {
 
     @Column(name = "date_fix")
     private Date dateFix;
+
+    @Column(name = "status")
+    private Integer status;
 }

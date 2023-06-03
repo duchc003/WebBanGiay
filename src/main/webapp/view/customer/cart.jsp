@@ -20,79 +20,94 @@
 <body>
 <jsp:include page="/view/header.jsp"></jsp:include>
 <div class="container" style="padding-top: 20px;">
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <td class="col">Hình ảnh</td>
-                        <td class="col">Tên sản phẩm</td>
-                        <td class="col">Số lượng</td>
-                        <td class="col">Đơn Giá</td>
-                        <td class="col">Tổng cộng</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${cartDetailDTOS}" var="list" varStatus="loop">
-                        <tr>
-                            <td><a href=""><img src="${list.image}" style="width: 80px;height: 80px;"></a></td>
-                            <td><a href=""></a>${list.name} <br>
-                                <small>Chọn size nam: ${list.size}</small></td>
-                            <td class="text-center">
-                                <form action="/cart/update/${list.idCart}" method="post">
-                                    <div class="mXmGu+ shopee-input-quantity">
-                                        <button type="submit" class="mJX7hG"
-                                                onclick="decreaseValue(${loop.index},${list.idCart})">
-                                            -
-                                        </button>
-                                        <input id="quantityInput${loop.index}"
-                                               class="mJX7hG _8BP9GU"
-                                               type="text" role="spinbutton" aria-valuenow="1"
-                                               value="${list.quantity}" name="quantity">
-                                        <button type="submit" class="mJX7hG"
-                                                onclick="increaseValue(${loop.index})">
-                                            +
-                                        </button>
-                                    </div>
-                                </form>
-                            </td>
-                            <td class="text-center td-price"><fmt:formatNumber value="${list.price}"
-                                                                               pattern="###,###"/>đ</td>
-                            <td class="text-center td-total"><fmt:formatNumber value="${list.price * list.quantity}"
-                                                                               pattern="###,###"/>đ</td>
-                            <c:set var="subTotal" value="${list.price * list.quantity}" />
-                            <c:set var="total" value="${total + subTotal}" />
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="cart-bottom">
-                <div class="cart-total">
+    <c:if test="${not empty cartDetailDTOS}">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="table-responsive">
+
                     <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="col">Hình ảnh</td>
+                            <td class="col">Tên sản phẩm</td>
+                            <td class="col">Số lượng</td>
+                            <td class="col">Đơn Giá</td>
+                            <td class="col">Tổng cộng</td>
+                        </tr>
+                        </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-right"><strong>Thành tiền:</strong></td>
-                            <td class="text-right"><fmt:formatNumber value="${total}" pattern="###,###"/>đ</td>
-                        </tr>
-                        <tr>
-                            <td class="text-right"><strong>Tổng:</strong></td>
-                            <td class="text-right"><fmt:formatNumber value="${total}" pattern="###,###"/>₫</td>
-                        </tr>
+                        <c:forEach items="${cartDetailDTOS}" var="list" varStatus="loop">
+                            <tr>
+                                <td><a href=""><img src="${list.image}" style="width: 80px;height: 80px;"></a></td>
+                                <td><a href=""></a>${list.name} <br>
+                                    <small>Chọn size nam: ${list.size}</small></td>
+                                <td class="text-center">
+                                    <form action="/cart/update/${list.idCart}" method="post">
+                                        <div class="mXmGu+ shopee-input-quantity">
+                                            <button type="submit" class="mJX7hG"
+                                                    onclick="decreaseValue(${loop.index},${list.idCart})">
+                                                -
+                                            </button>
+                                            <input id="quantityInput${loop.index}"
+                                                   class="mJX7hG _8BP9GU"
+                                                   type="text" role="spinbutton" aria-valuenow="1"
+                                                   value="${list.quantity}" name="quantity">
+                                            <button type="submit" class="mJX7hG"
+                                                    onclick="increaseValue(${loop.index})">
+                                                +
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="text-center td-price"><fmt:formatNumber value="${list.price}"
+                                                                                   pattern="###,###"/>đ
+                                </td>
+                                <td class="text-center td-total"><fmt:formatNumber value="${list.price * list.quantity}"
+                                                                                   pattern="###,###"/>đ
+                                </td>
+                                <c:set var="subTotal" value="${list.price * list.quantity}"/>
+                                <c:set var="total" value="${total + subTotal}"/>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="buttons clearfix">
-                <div class="pull-right"><a href="/oder/view-thanh-toan"
-                                           class="btn btn-primary"><span>Thanh toán</span></a></div>
+            <div class="col-lg-4">
+                <div class="cart-bottom">
+                    <div class="cart-total">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Thành tiền:</strong></td>
+                                <td class="text-right"><fmt:formatNumber value="${total}" pattern="###,###"/>đ</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Tổng:</strong></td>
+                                <td class="text-right"><fmt:formatNumber value="${total}" pattern="###,###"/>₫</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="buttons clearfix">
+                    <div class="pull-right"><a href="/oder/view-thanh-toan"
+                                               class="btn btn-primary"><span>Thanh toán</span></a></div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </c:if>
+    <c:if test="${empty cartDetailDTOS}">
+        <div class="container" style="margin-right: auto;margin-left: auto;width: 1200px;">
+            <div class="snlrc5 --3Iu+" style="display: flex;align-items: center;justify-content: center;height: 37.5rem;flex-direction: column;">
+                <div class="+2nxRQ"></div>
+                <div class="zH4psk">Giỏ hàng của bạn còn trống</div>
+                <a class="OpSzHa" href="/">
+                    <button class="shopee-button-solid shopee-button-solid--primary"><span
+                            class="_3Vjf2+">MUA NGAY</span></button>
+                </a></div>
+        </div>
+    </c:if>
 </div>
 <jsp:include page="/view/footer.jsp"></jsp:include>
 <script>

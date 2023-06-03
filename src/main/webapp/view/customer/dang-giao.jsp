@@ -56,24 +56,17 @@
                         <a class="nav-link" href="/customer/traHangHoanTat">Trả hàng/Hoàn tiền</a>
                     </li>
                 </ul>
-                <div class="card mt-4">
-                    <div class="card-header">
-                        Đơn hàng 1
+                <c:forEach var="list" items="${donHangDTOList}" varStatus="index">
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            Đơn hàng ${index.index + 1}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${list.name}</h5>
+                            <p class="card-text">${list.status == 3 ? 'Đang Giao ' : ''}</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Sản phẩm: ABC</h5>
-                        <p class="card-text">Trạng thái: Chờ thanh toán</p>
-                    </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header">
-                        Đơn hàng 2
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Sản phẩm: XYZ</h5>
-                        <p class="card-text">Trạng thái: Đang giao</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>

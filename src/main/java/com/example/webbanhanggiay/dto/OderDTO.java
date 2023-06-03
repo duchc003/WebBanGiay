@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,10 +25,6 @@ public class OderDTO {
     @NotBlank(message = "Vui lòng Nhập Địa Chỉ")
     private String address;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Wrong email format")
-    private String email;
-
     @NotNull(message = "Vui Lòng Nhập Số Điện Thoại")
     private Integer phone;
 
@@ -39,8 +36,11 @@ public class OderDTO {
 
     private Integer idProduct;
 
+    private Integer idCart;
+
     private Integer quantity;
 
     private BigDecimal totalMoney;
+
 
 }

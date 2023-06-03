@@ -229,13 +229,16 @@
             <th scope="col">Người Nhận</th>
             <th scope="col">Số Điện Thoại</th>
             <th scope="col">Ngày Đặt</th>
-            <th scope="col">Tổng Tiền</th>
+            <th scope="col">Ngày Giao Hàng</th>
+            <th scope="col">Ngày Nhận Hàng</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">Session</th>
           </tr>
           </thead>
           <tbody>
           <tr>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

@@ -229,24 +229,37 @@
                         <th scope="col">Người Nhận</th>
                         <th scope="col">Số Điện Thoại</th>
                         <th scope="col">Ngày Đặt</th>
-                        <th scope="col">Tổng Tiền</th>
+                        <th scope="col">Ngày Giao Hàng</th>
+                        <th scope="col">Ngày Nhận Hàng</th>
                         <th scope="col">Trạng Thái</th>
                         <th scope="col">Session</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="/oder/detail" class="btn btn-warning papding">Chi Tiết</a>
-                            <a href="#" class="btn btn-warning">Hóa Đơn</a>
-                        </td>
-                    </tr>
+                    <c:forEach var="list" items="${donHangDTOList}" varStatus="i">
+                        <tr>
+                            <td>${i.index + 1}</td>
+                            <td>${list.hoVaTen}</td>
+                            <td>${list.phone}</td>
+                            <td>${list.ngayDatHang}</td>
+                            <td>${list.ngayGiaoHang}</td>
+                            <td>${list.ngayNhanHang}</td>
+                            <td>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected></option>
+                                    <option value="1">Chờ Thanh Toán</option>
+                                    <option value="2">Vận Chuyển</option>
+                                    <option value="3">Đang Giao</option>
+                                    <option value="4">Hoàn Thành</option>
+                                    <option value="5">Đã hủy</option>
+                                </select>
+                            </td>
+                            <td>
+                                <a href="/oder/detail" class="btn btn-warning papding">Chi Tiết</a>
+                                <a href="#" class="btn btn-warning">Hóa Đơn</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
