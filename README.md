@@ -1,4 +1,10 @@
 # Web Bán Giày
+Ngôn Ngữ Sử Dụng :java,javascript
+Famework:spring boot
+Sử dụng Mô Hình MVC:model,view,controller
+Mô hình ba lớp (three tier)
+jsp,css
+sql server
 - Luồng nghiệp vụ bán hàng 
 - Luồng bán hàng theo hình thức online trên web
 1. khách hàng sẽ tạo tài khoản trên web và đăng nhập vào trang web để có thể xem được các sản phẩm giày ở trong trang web
